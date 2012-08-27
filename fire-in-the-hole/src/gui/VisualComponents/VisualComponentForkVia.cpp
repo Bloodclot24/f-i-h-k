@@ -16,8 +16,12 @@ VisualComponentForkVia::~VisualComponentForkVia() {
 
 }
 
-VisualCompositeComponent* VisualComponentForkVia::getCopy(){
-	return new VisualComponentForkVia(*this);
+VisualCompositeComponent* VisualComponentForkVia::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentForkVia(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 

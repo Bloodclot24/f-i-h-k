@@ -8,11 +8,16 @@ VisualComponentEntity::VisualComponentEntity( Diagram& diagram) : VisualComposit
 
 VisualComponentEntity::VisualComponentEntity(const VisualComponentEntity& other) : VisualCompositeComponent(other.m_diagram) {
 	m_component = new Entity(*(Entity*)other.m_component);
+	std::cout<<other.m_diagram.getName();
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentEntity::getCopy(){
-	return new VisualComponentEntity(*this);
+VisualCompositeComponent* VisualComponentEntity::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentEntity(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 InfluenceArea VisualComponentEntity::getInfluenceArea() {

@@ -10,8 +10,12 @@ VisualComponentRelation::VisualComponentRelation(const VisualComponentRelation& 
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentRelation::getCopy(){
-	return new VisualComponentRelation(*this);
+VisualCompositeComponent* VisualComponentRelation::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentRelation(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 InfluenceArea VisualComponentRelation::getInfluenceArea() {

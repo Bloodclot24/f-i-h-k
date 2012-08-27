@@ -12,8 +12,12 @@ VisualComponentAttribute::VisualComponentAttribute(const VisualComponentAttribut
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentAttribute::getCopy(){
-	return new VisualComponentAttribute(*this);
+VisualCompositeComponent* VisualComponentAttribute::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentAttribute(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 

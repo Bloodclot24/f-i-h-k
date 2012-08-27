@@ -12,8 +12,12 @@ VisualComponentCompositeAttribute::VisualComponentCompositeAttribute(const Visua
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentCompositeAttribute::getCopy(){
-	return new VisualComponentCompositeAttribute(*this);
+VisualCompositeComponent* VisualComponentCompositeAttribute::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentCompositeAttribute(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 

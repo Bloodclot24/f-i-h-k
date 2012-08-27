@@ -13,7 +13,7 @@ public:
 	virtual ~VisualComponentAttribute() {
 	}
 
-	virtual VisualCompositeComponent* getCopy();
+	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
 
 	VisualComponentAttribute(const VisualComponentAttribute& other);
 

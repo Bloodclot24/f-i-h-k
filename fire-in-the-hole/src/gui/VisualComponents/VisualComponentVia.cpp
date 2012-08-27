@@ -228,8 +228,12 @@ void VisualComponentVia::load(XmlReader& reader, Diagram & diagram){
 
 void VisualComponentVia::invertConnections(){ }
 
-VisualCompositeComponent* VisualComponentVia::getCopy(){
-	return new VisualComponentVia(*this);
+VisualCompositeComponent* VisualComponentVia::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentVia(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 void VisualComponentVia::setSelected(bool sel){

@@ -84,6 +84,7 @@ void Component::deserialize(XmlReader & reader)
 }
 
 void Component::addToDiagram(Diagram &diagram){
+	std::cout<<"/Agrego  " << getName() << " a "<<diagram.getName()<<"/";
 	diagram.addComponent(this);
 }
 

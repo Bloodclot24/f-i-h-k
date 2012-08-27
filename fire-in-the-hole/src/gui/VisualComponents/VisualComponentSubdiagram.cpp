@@ -20,8 +20,12 @@ VisualComponentSubdiagram::VisualComponentSubdiagram(const VisualComponentSubdia
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentSubdiagram::getCopy(){
-	return new VisualComponentSubdiagram(*this);
+VisualCompositeComponent* VisualComponentSubdiagram::getCopy(Diagram & diagram){
+	Diagram & origen = m_diagram;
+	m_diagram = diagram;
+	VisualCompositeComponent* comp = new VisualComponentSubdiagram(*this);
+	m_diagram = origen;
+	return comp;
 }
 
 InfluenceArea VisualComponentSubdiagram::getInfluenceArea() {
