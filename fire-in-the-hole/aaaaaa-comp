@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram name="as">
+  <entidad name="entidad" id="2"><atributo id="0" name="atributo0"></atributo></entidad>
+  <relacion name="relacion" id="3"></relacion>
+  <rol name="rol" id="4"></rol>
+  <rol name="rol" id="5"></rol>
+  <rol name="rol" id="6"></rol>
+  <entidad name="entidad" id="7"></entidad>
+  <rol name="rol" id="8"></rol>
+</diagram>
