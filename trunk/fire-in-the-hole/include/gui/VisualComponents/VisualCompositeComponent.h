@@ -47,8 +47,9 @@ public:
         return m_children;
     }
 
-    virtual VisualCompositeComponent *getCopy()
+    virtual VisualCompositeComponent *getCopy(Diagram & diagram)
     {
+    	m_diagram = diagram;
         return NULL;
     }
 

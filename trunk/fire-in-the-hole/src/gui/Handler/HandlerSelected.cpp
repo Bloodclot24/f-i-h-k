@@ -207,7 +207,7 @@ std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(){
 	std::list< VisualComponentVia* > originalVias;
 	std::vector< VisualCompositeComponent* >* newSelection = new std::vector< VisualCompositeComponent* >();
 	for ( std::vector< VisualCompositeComponent* >::iterator it=m_selection->begin() ; it!=m_selection->end() ; ++it) {
-		VisualCompositeComponent* copy = (*it)->getCopy();
+		VisualCompositeComponent* copy = (*it)->getCopy(*((Workspace*)m_drawArea)->getDiagram());
 		VisualComponentVia* viaCopy = dynamic_cast< VisualComponentVia* >(copy);
 		// si los conectores de la via estan seleccionados ==> esta se debe copiar.
 		if ( viaCopy != NULL ){

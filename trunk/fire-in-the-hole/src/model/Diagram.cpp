@@ -10,6 +10,7 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <gtkmm-2.4/gtkmm/messagedialog.h>
 
 
 Diagram::Diagram(const std::string & name) {
@@ -69,14 +70,26 @@ void Diagram::finalizeSerialization(){
 
 int Diagram::getId(Component* component)
 {
+/*	for(unsigned i = 0; i < m_components.size(); i++)
+		if(m_components[i]->isIqual(*component)) {
+			std::cout<<"/indice  " << i << "/";
+			return i;
+		}
+	return -1;
+	*/
+	int size1 = m_components.size();
+	int size = m_serializationIndex->size();
 	if ( m_serializationIndex->count(component)==0)
 		return -1;
 	return (*m_serializationIndex)[component];
+
 }
 
 void Diagram::addComponent(Component* component)
 {
 	m_components.push_back(component);
+	Component* comp = m_components[0];
+	std::cout<<"/diagrama  " << getName() << " cantidad de componentes "<<m_components.size()<<"/";
 }
 
 void Diagram::addAttribute(Attribute* Attribute) {
@@ -239,28 +252,21 @@ void Diagram::validateDiagram(std::fstream & filestr){
 
 	filestr<< "<HTML><HEAD><TITLE>ARCHIVO DE VALIDACION</TITLE></HEAD><BODY> ";
 
-
-	for(std::vector<Component*>::iterator it = m_components.begin(); it != m_components.end(); ++it){
-
+	for(std::vector<Component*>::iterator it = m_components.begin(); it != m_components.end(); ++it)
 		(*it)->validate(filestr,valido);
-
-	}
-
-	for(std::vector<Attribute*>::iterator it = m_attributes.begin(); it != m_attributes.end(); ++it){
-
+	for(std::vector<Attribute*>::iterator it = m_attributes.begin(); it != m_attributes.end(); ++it)
 		(*it)->validate(filestr,valido);
-
-	}
 
 	filestr << "<H1>**************************************************************************************************" << "</H1>";
 	filestr << "<H1>**************************************************************************************************" << "</H1>";
 
-	if (valido)
-	{
-		//TODO: Poner una linea al principio del txt que diga que el diagrama es valido
+	if (valido) {
+		Gtk::MessageDialog msg("El diagrama es válido. Se ha generado el html de los detalles.");
+		msg.run();
 		filestr << "<font color=\"green\">" << "<STRONG> EL DIAGRAMA ANALIZADO ES VALIDO </STRONG>" << std::endl;
 	}else{
-		//TODO: Poner una linea al principio del txt que diga que el diagrama es invalido
+		Gtk::MessageDialog msg("El diagrama es inválido. Se ha generado el html de los detalles.");
+		msg.run();
 		filestr << "<font color=\"red\">" <<"<STRONG> EL DIAGRAMA ANALIZADO ES INVALIDO </STRONG>" <<std::endl;
 	}
 

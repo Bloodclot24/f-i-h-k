@@ -52,7 +52,7 @@ public:
     void alignPoints(Point *newPoint, Point *alignPoint, int x, int y);
     void alignSegment(VisualComponentSegment *editedSegment);
     virtual void invertConnections();
-    virtual VisualCompositeComponent *getCopy();
+    virtual VisualCompositeComponent *getCopy(Diagram & diagram);
 
     VisualComponentConector *getStartConector() const
     {

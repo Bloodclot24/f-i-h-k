@@ -17,6 +17,7 @@ private:
 	BarraDeMenu& barraDeMenu;
 	std::vector<SubVentana*> subVentanas;
 	bool m_active;
+	std::string m_proyectName;
 
 	void save_as();
 
@@ -56,10 +57,25 @@ public:
 	void on_menu_new();
 
 	/**
+	 *
+	 */
+	void on_menu_new_proyect();
+
+	/**
 	 * Permite elegir y abrir un archivo correspondiente a un diagrama
 	 * ya cargado.
 	 */
 	void on_menu_open();
+
+	/**
+	 *
+	 */
+	void on_menu_open_proyect();
+
+	/**
+	 *
+	 */
+	void on_menu_close_proyect();
 
 	/**
 	 * Metodos que guardan el diagrama correspondiente a la subventana actual.

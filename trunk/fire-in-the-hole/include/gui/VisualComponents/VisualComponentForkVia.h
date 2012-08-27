@@ -12,7 +12,7 @@ public:
 
 	virtual ~VisualComponentForkVia();
 
-	virtual VisualCompositeComponent* getCopy();
+	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 

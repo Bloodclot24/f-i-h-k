@@ -15,7 +15,7 @@ public:
 
 	virtual ~VisualComponentCompositeAttribute() {
 	}
-	virtual VisualCompositeComponent* getCopy();
+	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 

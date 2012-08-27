@@ -16,7 +16,7 @@ public:
 	virtual ~VisualComponentEntity() {
 	}
 
-	virtual VisualCompositeComponent* getCopy();
+	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
 
 	virtual void draw(Cairo::RefPtr<Cairo::Context> ptrContext);
 
