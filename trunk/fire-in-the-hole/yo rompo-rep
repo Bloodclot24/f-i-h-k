@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram name="ddd" sizex="683" sizey="225">
+  <atributo name="atributo0" type="0" x="455" y="128" expression="" id0="0" id1="0" id2="0" id="0"><NULL id="-1"></NULL></atributo>
+  <atributo name="atributo1" type="0" x="667" y="111" expression="" id0="0" id1="0" id2="0" id="1"><rol id="8"></rol></atributo>
+  <atributo name="atributo2" type="0" x="453" y="90" expression="" id0="0" id1="0" id2="0" id="2"><rol id="8"></rol></atributo>
+  <diagrama name="" type="0" x="0" y="0" id="-1"></diagrama>
+  <diagrama name="" type="0" x="0" y="0" id="-1"></diagrama>
+  <entidad name="entidad" type="0" x="557" y="180" id="7"><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><rol id="10"></rol><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL></entidad>
+  <rol name="rol" type="0" x="476" y="157" nroSalida="0" id="8"><Punto x="675" y="119" movible="0"></Punto><Punto x="518" y="119" movible="1"></Punto><Punto x="518" y="98" movible="1"></Punto><Punto x="461" y="98" movible="0"></Punto></rol>
+  <relacion name="relacion" type="0" x="401" y="195" id="9"><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><rol id="10"></rol><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL></relacion>
+  <rol name="rol" type="0" x="425" y="219" nroSalida="0" id="10"><Punto x="428" y="222" movible="0"></Punto><Punto x="406" y="222" movible="1"></Punto><Punto x="406" y="207" movible="1"></Punto><Punto x="597" y="207" movible="0"></Punto></rol>
+  <at_compuesto name="at_compuesto" type="0" x="332" y="151" expression="" id0="0" id1="0" id2="0" id="11"><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL><NULL id="-1"></NULL></at_compuesto>
+</diagram>

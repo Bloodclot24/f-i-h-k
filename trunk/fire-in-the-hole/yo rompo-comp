@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram name="ddd">
+  < name="" id="-1"></>
+  < name="" id="-1"></>
+  <entidad name="entidad" id="7"></entidad>
+  <rol name="rol" id="8"></rol>
+  <relacion name="relacion" id="9"></relacion>
+  <rol name="rol" id="10"></rol>
+  <at_compuesto name="at_compuesto" id="11"></at_compuesto>
+</diagram>
