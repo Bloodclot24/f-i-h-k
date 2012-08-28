@@ -15,8 +15,10 @@ CompositeAttribute::CompositeAttribute(const std::string & name, int orientation
 
 
 CompositeAttribute::CompositeAttribute(const CompositeAttribute & otro) : Component(otro){
-
 	initializeConnectors();
+	m_options[0] = otro.m_options[0];
+	m_options[1] = otro.m_options[1];
+	m_options[2] = otro.m_options[2];
 }
 
 
@@ -24,6 +26,9 @@ CompositeAttribute& CompositeAttribute::operator=(const CompositeAttribute& otro
 
 	Component::operator=(otro);
 	initializeConnectors();
+	m_options[0] = otro.m_options[0];
+	m_options[1] = otro.m_options[1];
+	m_options[2] = otro.m_options[2];
 	return *this;
 }
 

@@ -57,6 +57,8 @@ void Tabs::agregarSubVentana(Diagram* diagram) {
 	barraDeMenu.setActive(true); // habilita los eventos del menu.
 }
 
+
+
 void Tabs::removerSubVentanaActual() {
 	int paginaActual = get_current_page();
 	remove_page(paginaActual);
