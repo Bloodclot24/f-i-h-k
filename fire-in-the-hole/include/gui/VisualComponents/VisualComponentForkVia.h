@@ -6,13 +6,13 @@
 class VisualComponentForkVia: public VisualCompositeComponent {
 public:
 
-	VisualComponentForkVia(Diagram& diagram);
+	VisualComponentForkVia(Diagram* diagram);
 
 	VisualComponentForkVia(const VisualComponentForkVia& other);
 
 	virtual ~VisualComponentForkVia();
 
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 

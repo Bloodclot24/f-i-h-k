@@ -8,12 +8,12 @@ class Diagram;
 
 class VisualComponentAttribute: public VisualCompositeComponent{
 public:
-	VisualComponentAttribute( Diagram& diagram);
+	VisualComponentAttribute( Diagram* diagram);
 
 	virtual ~VisualComponentAttribute() {
 	}
 
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	VisualComponentAttribute(const VisualComponentAttribute& other);
 

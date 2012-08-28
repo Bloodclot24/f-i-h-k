@@ -51,7 +51,7 @@ void BarraDeHerramientas::createVisualComponent(){
 	Workspace* currentWorkspace = m_tabs->getCurrentWorkspace();
 	if ( currentWorkspace == NULL)
 		return;
-	HandlerCreateComponent* handler = new HandlerCreateComponent(currentWorkspace, new T(*currentWorkspace->getDiagram()));
+	HandlerCreateComponent* handler = new HandlerCreateComponent(currentWorkspace, new T(currentWorkspace->getDiagram()));
 	currentWorkspace->setHandler(handler);
 	for( unsigned i=0 ; i<CANTIDAD_BOTONES ; i++){
 		m_buttons[i].get_display()->pointer_ungrab(NULL);

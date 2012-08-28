@@ -23,7 +23,7 @@ private:
 	/**
 	 * Sobre el cual trabaja este workspace.
 	 */
-	Diagram& m_diagram;
+	Diagram* m_diagram;
 	int m_diagramOffsetX;
 	int m_diagramOffsetY;
 
@@ -39,7 +39,7 @@ private:
     void printErrorMessage(const Cairo::RefPtr<Cairo::Context>& ptrContext, const std::string& errorMessage, double wrap);
 
 public:
-	Workspace(Diagram& diagram, bool enableEvents = true);
+	Workspace(Diagram* diagram, bool enableEvents = true);
 
 	virtual ~Workspace();
 
@@ -87,8 +87,8 @@ public:
 	  */
 	 void getSize(double& sizeX, double& sizeY) {
 		 updateDiagramSize();
-		 sizeX = m_diagram.getSizeX() + m_diagramOffsetX;
-		 sizeY = m_diagram.getSizeY() + m_diagramOffsetY;
+		 sizeX = m_diagram->getSizeX() + m_diagramOffsetX;
+		 sizeY = m_diagram->getSizeY() + m_diagramOffsetY;
 	 }
 
 	/**

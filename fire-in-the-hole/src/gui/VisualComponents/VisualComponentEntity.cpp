@@ -1,19 +1,19 @@
 #include "gui/VisualComponents/VisualComponentEntity.h"
 #include "gui/Dibujar/AuxiliarDibujar.h"
 
-VisualComponentEntity::VisualComponentEntity( Diagram& diagram) : VisualCompositeComponent(diagram) {
+VisualComponentEntity::VisualComponentEntity( Diagram* diagram) : VisualCompositeComponent(diagram) {
 	m_component = new Entity();
 	initialize();
 }
 
 VisualComponentEntity::VisualComponentEntity(const VisualComponentEntity& other) : VisualCompositeComponent(other.m_diagram) {
 	m_component = new Entity(*(Entity*)other.m_component);
-	std::cout<<other.m_diagram.getName();
+	std::cout<<other.m_diagram->getName();
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentEntity::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentEntity::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentEntity(*this);
 	m_diagram = origen;

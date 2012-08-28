@@ -28,6 +28,7 @@
 #define TARGET_ID_0 "id0"
 #define TARGET_ID_1 "id1"
 #define TARGET_ID_2 "id2"
+#define TARGET_OTHER_DIAGRAM "other_diagram"
 
 /**
  * Clase utilizada durante la persistencia para transformar

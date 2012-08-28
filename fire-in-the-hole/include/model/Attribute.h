@@ -16,7 +16,7 @@ public:
 
 	virtual void deserialize(XmlReader & reader);
 
-	virtual void removeFromDiagram(Diagram &diagram);
+	virtual void removeFromDiagram(Diagram* diagram);
 
 };
 

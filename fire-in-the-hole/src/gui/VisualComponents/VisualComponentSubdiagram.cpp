@@ -2,7 +2,7 @@
 #include "gui/VisualComponents/VisualComponentConector.h"
 #include "xml/XmlReader.h"
 
-VisualComponentSubdiagram::VisualComponentSubdiagram(Diagram& diagram, const std::string & xml) :
+VisualComponentSubdiagram::VisualComponentSubdiagram(Diagram* diagram, const std::string & xml) :
 VisualCompositeComponent(diagram),	m_xml(xml) {
 	m_component = new Subdiagram();
 	if(m_xml != "")
@@ -10,7 +10,7 @@ VisualCompositeComponent(diagram),	m_xml(xml) {
 }
 
 VisualComponentSubdiagram::	VisualComponentSubdiagram( Diagram* diagram, Diagram* sourceDiagram, const std::string & name, std::vector< VisualCompositeComponent* >* components, bool source) :
-VisualCompositeComponent(*diagram) {
+VisualCompositeComponent(diagram) {
 	m_component = new Subdiagram(name);
 	m_components = components;
 }
@@ -20,8 +20,8 @@ VisualComponentSubdiagram::VisualComponentSubdiagram(const VisualComponentSubdia
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentSubdiagram::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentSubdiagram::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentSubdiagram(*this);
 	m_diagram = origen;
@@ -46,7 +46,7 @@ void VisualComponentSubdiagram::crear() {
 	initialize();
 }
 
-void VisualComponentSubdiagram::load(XmlReader& reader, Diagram & diagram){
+void VisualComponentSubdiagram::load(XmlReader& reader, Diagram* diagram){
 	VisualCompositeComponent::load(reader, diagram);
 	//Luego de cargar la cantidad de entradas y salidas se inicializan los conectores
 	initialize();

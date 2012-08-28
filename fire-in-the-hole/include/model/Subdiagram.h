@@ -21,12 +21,12 @@ public:
 	 * Se agrega a la coleccion de subdiagramas en el diagrama pasado como parametro
 	 * @param diagram
 	 */
-	virtual void addToDiagram(Diagram &diagram);
+	virtual void addToDiagram(Diagram* diagram);
 
 	/**
 	 * Remueve su instancia de la coleccion de subdiagramas en el diagrama
 	 */
-	virtual void removeFromDiagram(Diagram &diagram);
+	virtual void removeFromDiagram(Diagram* diagram);
 
 /*    std::string getIP() const
     {

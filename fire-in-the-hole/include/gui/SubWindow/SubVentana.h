@@ -17,8 +17,8 @@
  */
 class SubVentana : public Gtk::VBox {
 private:
-    Diagram & m_diagram;
 
+	Workspace* workspace;
     //Estructura.
     Gtk::HBox boxInicial;
     Gtk::VBox boxHomogenea;
@@ -27,7 +27,7 @@ private:
     Gtk::ScrolledWindow scrollWorkspace;
     Gtk::Adjustment ajusteHorizontal, ajusteVertical;
     Gtk::Viewport adaptador;
-    Workspace workspace;
+
 
 public:
 	/**
@@ -37,14 +37,18 @@ public:
 	 * @param control
 	 * @param allocation
 	 */
-	SubVentana(Diagram& diagram, Gtk::Allocation allocation);
+	SubVentana(Diagram* diagram, Gtk::Allocation allocation);
+
+	virtual ~SubVentana() {
+		delete workspace;
+	}
 
     Workspace* getWorkspace() {
-        return &workspace;
+        return workspace;
     }
 
     Diagram* getDiagram() {
-    	return &m_diagram;
+    	return workspace->getDiagram();
     }
 };
 

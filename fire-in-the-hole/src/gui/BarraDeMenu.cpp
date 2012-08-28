@@ -234,8 +234,8 @@ void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 	handler->setSelection(m_selection);
 	handler->setDarea(subVentana->getWorkspace());
 	handler->copy(true);
-	for(int i = 0; i < handler->getSelection()->size(); i++)
-		subVentana->getWorkspace()->getDiagram()->addComponent((*handler->getSelection())[i]->getComponent());
+//	for(int i = 0; i < handler->getSelection()->size(); i++)
+//		subVentana->getWorkspace()->getDiagram()->addComponent((*handler->getSelection())[i]->getComponent());
 	handler->setDarea(subVentanaAnterior->getWorkspace());
 	handler->createSubdiagram();
 	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
@@ -251,10 +251,13 @@ void BarraDeMenu::exportSubdiagram(){
 
 	SubVentana* subVentanaAnterior = subVentana;
 	m_tabs->on_menu_open();
+//	for(int i = 0; i < han->getSelection()->size(); i++)
+//		subVentanaAnterior->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
+
 	han->setDarea(subVentana->getWorkspace());
 	han->copy(true);
-	for(int i = 0; i < han->getSelection()->size(); i++)
-		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
+//	for(int i = 0; i < han->getSelection()->size(); i++)
+//		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
 	han->setDarea(subVentanaAnterior->getWorkspace());
 	han->createSubdiagram();
 	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
@@ -267,17 +270,24 @@ void BarraDeMenu::createSubdiagram(){
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
 	SubVentana* subVentanaAnterior = subVentana;
-
+	int size = subVentanaAnterior->getDiagram()->getComponents()->size();
 	m_tabs->agregarSubVentana();
-
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
+//	for(int i = 0; i < han->getSelection()->size(); i++)
+//		subVentanaAnterior->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
 	han->setDarea(subVentana->getWorkspace());
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
 	han->copy(true);
-	for(int i = 0; i < han->getSelection()->size(); i++)
-		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
+//	for(int i = 0; i < han->getSelection()->size(); i++)
+//		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
 	han->setDarea(subVentanaAnterior->getWorkspace());
 	han->createSubdiagram();
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
 	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
 	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
+	size = subVentanaAnterior->getDiagram()->getComponents()->size();
 }
 
 void BarraDeMenu::setActive(bool act){

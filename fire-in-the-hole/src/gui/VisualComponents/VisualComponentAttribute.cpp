@@ -2,7 +2,7 @@
 #include "gui/VisualComponents/VisualComponentConector.h"
 #include "gui/SubWindow/ViewModifyAttributeInfoWin.h"
 
-VisualComponentAttribute::VisualComponentAttribute(Diagram& diagram) : VisualCompositeComponent(diagram){
+VisualComponentAttribute::VisualComponentAttribute(Diagram* diagram) : VisualCompositeComponent(diagram){
 	m_component = new Attribute();
 	initialize();
 }
@@ -12,8 +12,8 @@ VisualComponentAttribute::VisualComponentAttribute(const VisualComponentAttribut
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentAttribute::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentAttribute::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentAttribute(*this);
 	m_diagram = origen;

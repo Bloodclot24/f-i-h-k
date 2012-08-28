@@ -16,15 +16,15 @@ class VisualCompositeComponent : public VisualComponent{
 
 public:
 
-	VisualCompositeComponent(Diagram& diagram);
+	VisualCompositeComponent(Diagram* diagram);
 
 	VisualCompositeComponent(const VisualCompositeComponent &other);
 
 	virtual ~VisualCompositeComponent();
 
-	virtual void load(XmlReader& reader, Diagram & diagram);
+	virtual void load(XmlReader& reader, Diagram* diagram);
 
-	void store(XmlWriter& writer_rep, XmlWriter& writer_comp, Diagram & diagram);
+	void store(XmlWriter& writer_rep, XmlWriter& writer_comp, Diagram* diagram);
     void on_expose(Cairo::RefPtr<Cairo::Context> ptrContext);
     void on_move(int mouseX, int mouseY);
     VisualComponent *getTouchedSubVisualComponent(int x, int y);
@@ -39,7 +39,7 @@ public:
     virtual void setY(int y);
     virtual int getX() const;
     virtual int getY() const;
-    Diagram & getDiagram();
+    Diagram* getDiagram();
     void addChild(VisualComponent *child);
     void addView(VisualCompositeComponent *view);
 
@@ -53,7 +53,7 @@ public:
         return m_views;
     }
 
-    virtual VisualCompositeComponent *getCopy(Diagram & diagram)
+    virtual VisualCompositeComponent *getCopy(Diagram* diagram)
     {
     	m_diagram = diagram;
         return NULL;
@@ -63,7 +63,7 @@ protected:
     std::vector<VisualComponent*> m_children;
     std::vector< VisualCompositeComponent* > m_views;
     Component *m_component;
-    Diagram & m_diagram;
+    Diagram* m_diagram;
     void initialize();
     void removeChild(VisualComponent *child);
     int getXRelativeToCenter(VisualComponent *subVisualComponentent)

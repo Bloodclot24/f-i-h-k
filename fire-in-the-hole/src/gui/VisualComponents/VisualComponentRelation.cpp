@@ -1,6 +1,6 @@
 #include "gui/VisualComponents/VisualComponentRelation.h"
 
-VisualComponentRelation::VisualComponentRelation( Diagram& diagram) : VisualCompositeComponent(diagram) {
+VisualComponentRelation::VisualComponentRelation( Diagram* diagram) : VisualCompositeComponent(diagram) {
 	m_component = new Relation();
 	initialize();
 }
@@ -10,8 +10,8 @@ VisualComponentRelation::VisualComponentRelation(const VisualComponentRelation& 
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentRelation::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentRelation::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentRelation(*this);
 	m_diagram = origen;

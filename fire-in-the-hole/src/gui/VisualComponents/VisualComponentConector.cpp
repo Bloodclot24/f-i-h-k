@@ -2,7 +2,7 @@
 #include "gui/VisualComponents/VisualComponentVia.h"
 #include "gui/Dibujar/AuxiliarDibujar.h"
 
-VisualComponentConector::VisualComponentConector(VisualCompositeComponent* parent, Connector* connector, int nro, bool esEntrada, Diagram& diagram) :
+VisualComponentConector::VisualComponentConector(VisualCompositeComponent* parent, Connector* connector, int nro, bool esEntrada, Diagram* diagram) :
 	m_isEntry(esEntrada), m_number(nro), m_diagram(diagram) {
 	m_connector = connector;
 	m_parent = parent;

@@ -9,13 +9,13 @@
 
 class VisualComponentCompositeAttribute: public VisualCompositeComponent{
 public:
-	VisualComponentCompositeAttribute( Diagram& diagram);
+	VisualComponentCompositeAttribute(Diagram* diagram);
 
 	VisualComponentCompositeAttribute(const VisualComponentCompositeAttribute& other);
 
 	virtual ~VisualComponentCompositeAttribute() {
 	}
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 

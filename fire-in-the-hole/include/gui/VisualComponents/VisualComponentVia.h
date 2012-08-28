@@ -28,11 +28,11 @@ private:
 
 public:
 
-	VisualComponentVia(VisualComponentConector* start, Diagram& diagram, VisualComponentConector* end = NULL);
+	VisualComponentVia(VisualComponentConector* start, Diagram* diagram, VisualComponentConector* end = NULL);
 
 	VisualComponentVia(const VisualComponentVia& other);
 
-	VisualComponentVia(Diagram& diagram);
+	VisualComponentVia(Diagram* diagram);
 
 	virtual ~VisualComponentVia();
 
@@ -42,7 +42,7 @@ public:
 
 	virtual InfluenceArea getInfluenceArea();
 
-	virtual void load(XmlReader& reader, Diagram & diagram);
+	virtual void load(XmlReader& reader, Diagram* diagram);
 
 	void extend();
 
@@ -52,7 +52,7 @@ public:
     void alignPoints(Point *newPoint, Point *alignPoint, int x, int y);
     void alignSegment(VisualComponentSegment *editedSegment);
     virtual void invertConnections();
-    virtual VisualCompositeComponent *getCopy(Diagram & diagram);
+    virtual VisualCompositeComponent *getCopy(Diagram* diagram);
 
     VisualComponentConector *getStartConector() const
     {

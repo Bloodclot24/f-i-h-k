@@ -175,7 +175,7 @@ void Diagram::deserialize(XmlReader & reader)
 
 			if(component){
 				component->deserialize(reader);
-				component->addToDiagram(*this);
+				component->addToDiagram(this);
 				nodoAnterior = reader.getCurrentNode();
 				int identificador = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_ID));
 				components[identificador] = component;
