@@ -24,6 +24,7 @@ private:
     Glib::RefPtr<Gtk::UIManager> m_refUIManager;
 	Tabs* m_tabs;
 	HandlerSelected* handler;
+	std::vector< VisualCompositeComponent* >* m_selection;
 
 public:
 	BarraDeMenu();

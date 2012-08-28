@@ -71,12 +71,8 @@ void Tabs::removerSubVentanaActual() {
 void Tabs::on_switch_page_fake(GtkNotebookPage* page, guint page_num) {
 	SubVentana* subventanaAnterior = barraDeMenu.getSubVentana();
 	barraDeMenu.setSubventana(subVentanas[page_num]);
-	if(m_active) {
-		on_menu_close();
-		on_menu_open();
+	if(m_active)
 		barraDeMenu.switchTabs(subventanaAnterior);
-	}
-
 }
 
 void Tabs::on_menu_close() {

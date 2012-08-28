@@ -69,11 +69,17 @@ public:
 		return m_selection;
 	}
 
+	void setSelection(std::vector< VisualCompositeComponent* >* selection) {
+		m_selection = selection;
+	}
+
+	std::vector< VisualCompositeComponent* >* duplicateSelection(bool add = true);
+
 private:
 	std::vector< VisualCompositeComponent* >* m_selection;
 	bool m_clicked;
 
-	std::vector< VisualCompositeComponent* >* duplicateSelection();
+
 
 	bool onlyOneComponentSelected();
 
