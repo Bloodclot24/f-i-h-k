@@ -15,7 +15,7 @@
 
 class AskDiagramName {
 public:
-	AskDiagramName();
+	AskDiagramName(std::string name);
 	virtual ~AskDiagramName();
 	/**
 	 * @brief despliega una ventana que pide al usuario el nombre del diagrama.

@@ -1,5 +1,9 @@
 #include "model/Fork.h"
 #include "gui/Dibujar/Defines.h"
+#include "model/Connector.h"
+#include "model/Via.h"
+#include "model/Entity.h"
+#include "model/Attribute.h"
 
 Fork::Fork(const std::string & name, int orientation)
 : Component(name, orientation){
@@ -42,3 +46,24 @@ void Fork::initializeConnectors(){
 	m_types.push_back("Generalización");
 	m_types.push_back("Especialización");
 }
+
+void Fork::update() {
+	m_attributes.clear();
+	m_entities.clear();
+	for (unsigned i = 0; i < m_entryConnectors.size(); i++)
+		if (m_entryConnectors[i]->getVia() != NULL) {
+			Via* via = m_entryConnectors[i]->getVia();
+			if (via->getEndConnector() != m_entryConnectors[i]) {
+				if (via->getEndConnector()->isEntry())
+					m_entities.push_back((Entity*) via->getEndConnector()->getFather());
+				else
+					m_attributes.push_back((Attribute*) via->getEndConnector()->getFather());
+			} else {
+				if (via->getStartConnector()->isEntry())
+					m_entities.push_back((Entity*) via->getStartConnector()->getFather());
+				else
+					m_attributes.push_back((Attribute*) via->getStartConnector()->getFather());
+			}
+		}
+}
+

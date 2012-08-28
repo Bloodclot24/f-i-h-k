@@ -1,10 +1,10 @@
 #include "gui/SubWindow/AskDiagramName.h"
 #include "gtkmm/stock.h"
 
-const std::string LABEL_TEXT = "Ingrese el nombre del diagrama";
+const std::string LABEL_TEXT = "Ingrese el ";
 
-AskDiagramName::AskDiagramName() : m_label(LABEL_TEXT) {
-	m_dialog.set_title("Nombre del diagrama");
+AskDiagramName::AskDiagramName(std::string name) : m_label(LABEL_TEXT + name.c_str()) {
+	m_dialog.set_title(name.c_str());
 	m_dialog.get_vbox()->pack_start( m_label, true, true , 5);
 	m_dialog.get_vbox()->pack_start(m_nameEntry, true ,true, 5);
 

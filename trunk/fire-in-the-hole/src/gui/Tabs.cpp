@@ -16,15 +16,15 @@ Tabs::Tabs(BarraDeMenu& barraDeMenu) : barraDeMenu(barraDeMenu) {
 	set_scrollable(true);
 	signal_switch_page().connect(sigc::mem_fun(this, &Tabs::on_switch_page_fake));
 	Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup = Gtk::ActionGroup::create();
-	m_refActionGroup->add( Gtk::Action::create("NewProyect", "New Proyect"), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
-	m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW), sigc::mem_fun(this, &Tabs::on_menu_new));
-	m_refActionGroup->add( Gtk::Action::create("OpenProyect", "Open Proyect"), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
-	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN), sigc::mem_fun(this, &Tabs::on_menu_open));
-	m_refActionGroup->add( Gtk::Action::create("Save", Gtk::Stock::SAVE), sigc::mem_fun(this, &Tabs::on_menu_save));
-	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS), sigc::mem_fun(this, &Tabs::on_menu_save_as));
-	m_refActionGroup->add( Gtk::Action::create("CloseProyect", "Close Proyect"), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
-	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE), sigc::mem_fun(this, &Tabs::on_menu_close));
-	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", "Renombrar diagrama"), sigc::mem_fun(this, &Tabs::on_name_change));
+	m_refActionGroup->add( Gtk::Action::create("NewProyect", Gtk::Stock::NEW, "New Proyect"), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
+	m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW, "New Diagram"), sigc::mem_fun(this, &Tabs::on_menu_new));
+	m_refActionGroup->add( Gtk::Action::create("OpenProyect", Gtk::Stock::OPEN, "Open Proyect"), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
+	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN, "Open Diagram"), sigc::mem_fun(this, &Tabs::on_menu_open));
+	m_refActionGroup->add( Gtk::Action::create("Save", Gtk::Stock::SAVE, "Save Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save));
+	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS, "SaveAs Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save_as));
+	m_refActionGroup->add( Gtk::Action::create("CloseProyect", Gtk::Stock::CLOSE, "Close Proyect"), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
+	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE, "Close Diagram"), sigc::mem_fun(this, &Tabs::on_menu_close));
+	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", Gtk::Stock::EDIT, "Rename Diagram"), sigc::mem_fun(this, &Tabs::on_name_change));
 
 	barraDeMenu.addActionGroup(m_refActionGroup);
 	m_active = false;
@@ -38,7 +38,7 @@ Tabs::~Tabs() {
 void Tabs::agregarSubVentana(Diagram* diagram) {
 	Diagram* diagramDefault;
 	if (diagram == NULL) {
-		AskDiagramName dialog;
+		AskDiagramName dialog("Nombre del diagrama");
 		std::string diagramName = dialog.askName();
 		if (diagramName.size() == 0)
 			return;
@@ -56,8 +56,6 @@ void Tabs::agregarSubVentana(Diagram* diagram) {
 	subVentanaDefault->getWorkspace()->setActions(barraDeMenu.getRefActionGroup());
 	barraDeMenu.setActive(true); // habilita los eventos del menu.
 }
-
-
 
 void Tabs::removerSubVentanaActual() {
 	int paginaActual = get_current_page();
@@ -89,7 +87,7 @@ void Tabs::on_menu_new() {
 
 void Tabs::on_menu_new_proyect() {
 	on_menu_close_proyect();
-	AskDiagramName dialog;
+	AskDiagramName dialog("Nombre del proyecto");
 	m_proyectName = dialog.askName();
 	std::string proyectPath = Settings::getInstance().getValue("DiagramsPath") + m_proyectName;
 	mkdir(proyectPath.c_str(), 0777);
@@ -98,7 +96,7 @@ void Tabs::on_menu_new_proyect() {
 
 void Tabs::on_menu_open_proyect() {
 	on_menu_close_proyect();
-	AskDiagramName dialog;
+	AskDiagramName dialog("Nombre del proyecto");
 	m_proyectName = dialog.askName();
 	std::string proyectPath = Settings::getInstance().getValue("DiagramsPath") + m_proyectName;
 
@@ -112,8 +110,6 @@ void Tabs::on_menu_open_proyect() {
 	for (int i = 0; (ent = readdir(directorio)) != NULL; i++) {
 		std::string archivo = proyectPath + "/" + ent->d_name;
 		if(archivo.find("-rep") == archivo.length() - 4 ) {
-		//if(strcmp(archivo.substr(archivo.length() - 4, archivo.length()).c_str(),"-rep") == 0) {
-			std::cout << "Archivo -rep leido: " << archivo << std::endl;
 			XmlReader reader(archivo.c_str());
 			Diagram* circ = new Diagram();
 			agregarSubVentana(circ);
@@ -136,7 +132,6 @@ void Tabs::on_menu_open() {
 	fileChooser.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
 	int resultado = fileChooser.run();
 	if (resultado == Gtk::RESPONSE_OK) {
-		std::cout<<"archivo: " << fileChooser.get_filename() << std::endl;
 		XmlReader reader(fileChooser.get_filename().c_str());
 		Diagram* circ = new Diagram();
 		agregarSubVentana(circ);
@@ -151,7 +146,6 @@ void Tabs::save_as() {
 	fileChooser.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
 	int resultado = fileChooser.run();
 	if (resultado == Gtk::RESPONSE_OK) {
-
 		Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
 		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
 		std::string path = fileChooser.get_filename();
@@ -208,7 +202,7 @@ Workspace* Tabs::getCurrentWorkspace(){
 void Tabs::on_name_change() {
 	Workspace* currentWorkspace = getCurrentWorkspace();
 	if ( currentWorkspace != NULL){
-		AskDiagramName dialog;
+		AskDiagramName dialog("Nombre del diagrama");
 		std::string diagramName = dialog.askName();
 		if ( diagramName != ""){
 			currentWorkspace->getDiagram()->setName(diagramName);

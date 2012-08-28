@@ -9,8 +9,6 @@
 #include "utils/Settings.h"
 #include "gui/Tabs.h"
 
-//HandlerSelected* han;
-
 BarraDeMenu::BarraDeMenu() {
 	m_active = false;
 	m_refActionGroup = Gtk::ActionGroup::create();
@@ -20,8 +18,8 @@ BarraDeMenu::BarraDeMenu() {
 	m_refActionGroup->add( Gtk::Action::create("PageSetup", Gtk::Stock::PROPERTIES), sigc::mem_fun(this, &BarraDeMenu::on_menu_PageSetup));
 	m_refActionGroup->add( Gtk::Action::create("PrintPreview", Gtk::Stock::PRINT_PREVIEW), sigc::mem_fun(this, &BarraDeMenu::on_menu_PrintPreview));
 	m_refActionGroup->add( Gtk::Action::create("Print", Gtk::Stock::PRINT), Gtk::AccelKey("<control>P"), sigc::mem_fun(this, &BarraDeMenu::on_menu_Print));
-	m_refActionGroup->add( Gtk::Action::create("ExportarPdf", "Exportar PDF"), sigc::mem_fun(this, &BarraDeMenu::on_menu_exportar_PDF));
-	m_refActionGroup->add( Gtk::Action::create("ExportarPng", "Exportar PNG"), sigc::mem_fun(this, &BarraDeMenu::on_menu_exportar_PNG));
+	m_refActionGroup->add( Gtk::Action::create("ExportarPdf", Gtk::Stock::DND, "Export to PDF"), sigc::mem_fun(this, &BarraDeMenu::on_menu_exportar_PDF));
+	m_refActionGroup->add( Gtk::Action::create("ExportarPng", Gtk::Stock::FILE, "Export to PNG"), sigc::mem_fun(this, &BarraDeMenu::on_menu_exportar_PNG));
 	m_refActionGroup->add( Gtk::Action::create("Quit", Gtk::Stock::QUIT), sigc::ptr_fun(&Gtk::Main::quit));
 
 	m_refActionGroup->add( Gtk::Action::create("MenuEdit", "_Edit"));
@@ -29,11 +27,11 @@ BarraDeMenu::BarraDeMenu() {
 	m_refActionGroup->add( Gtk::Action::create("Copy", Gtk::Stock::COPY), sigc::mem_fun(*this, &BarraDeMenu::copy));
 	m_refActionGroup->add( Gtk::Action::create("Cut", Gtk::Stock::CUT), sigc::mem_fun(*this, &BarraDeMenu::cut));
 	m_refActionGroup->add( Gtk::Action::create("Properties", Gtk::Stock::PROPERTIES), sigc::mem_fun(*this, &BarraDeMenu::showProperties));
-	m_refActionGroup->add( Gtk::Action::create("Validate", Gtk::Stock::CONNECT,"Validar"), sigc::mem_fun(*this, &BarraDeMenu::validateDiagram));
+	m_refActionGroup->add( Gtk::Action::create("Validate", Gtk::Stock::CONNECT,"Validate"), sigc::mem_fun(*this, &BarraDeMenu::validateDiagram));
 
-	m_refActionGroup->add( Gtk::Action::create("Borrar", Gtk::Stock::CANCEL, "Borrar"), sigc::mem_fun(*this, &BarraDeMenu::deleteSelection));
-	m_refActionGroup->add( Gtk::Action::create("CrearSubdiagrama", Gtk::Stock::NEW, "Crear Subdiagrama"), sigc::mem_fun(*this, &BarraDeMenu::createSubdiagram));
-	m_refActionGroup->add( Gtk::Action::create("ExportarSubdiagrama", Gtk::Stock::NEW, "Exportar a otro diagrama"), sigc::mem_fun(*this, &BarraDeMenu::exportSubdiagram));
+	m_refActionGroup->add( Gtk::Action::create("Borrar", Gtk::Stock::CANCEL, "Delete"), sigc::mem_fun(*this, &BarraDeMenu::deleteSelection));
+	m_refActionGroup->add( Gtk::Action::create("CrearSubdiagrama", Gtk::Stock::CONVERT, "Create Subdiagram"), sigc::mem_fun(*this, &BarraDeMenu::createSubdiagram));
+	m_refActionGroup->add( Gtk::Action::create("ExportarSubdiagrama", Gtk::Stock::NETWORK, "Export Subdiagram"), sigc::mem_fun(*this, &BarraDeMenu::exportSubdiagram));
 
 	m_refActionGroup->add( Gtk::Action::create("MenuHelp", "_Help"));
 	m_refActionGroup->add( Gtk::Action::create("About", Gtk::Stock::ABOUT), sigc::mem_fun(*this, &BarraDeMenu::on_menu_about));
@@ -44,19 +42,19 @@ BarraDeMenu::BarraDeMenu() {
 	    "<ui>"
 	    "  <menubar name='MenuBar'>"
 	    "    <menu action='MenuFile'>"
-
 	    "      <menuitem action='New'/>"
 	    "      <menuitem action='Open'/>"
 		"	   <menuitem action='Save'/>"
 		"	   <menuitem action='SaveAs'/>"
 		"	   <menuitem action='Close'/>"
+		"      <separator/>"
 		"      <menuitem action='NewProyect'/>"
 		"      <menuitem action='OpenProyect'/>"
 		"      <menuitem action='CloseProyect'/>"
-
 	    "      <separator/>"
 		"	   <menuitem action='RenombrarDiagrama'/>"
 		"	   <menuitem action='PageSetup'/>"
+		"      <separator/>"
 		"	   <menuitem action='PrintPreview'/>"
 		"	   <menuitem action='Print'/>"
 		"	   <menuitem action='ExportarPdf'/>"
@@ -67,8 +65,8 @@ BarraDeMenu::BarraDeMenu() {
 	    "    <menu action='MenuEdit'>"
 		"      <menuitem action='Copy'/>"
 		"      <menuitem action='Cut'/>"
-		"      <separator/>"
 		"      <menuitem action='Borrar'/>"
+		"      <separator/>"
 		"      <menuitem action='CrearSubdiagrama'/>"
 		"      <menuitem action='ExportarSubdiagrama'/>"
 	    "    </menu>"
@@ -85,8 +83,21 @@ BarraDeMenu::BarraDeMenu() {
 	    "    <toolitem action='New'/>"
 		"    <toolitem action='Open'/>"
 	    "    <toolitem action='Save'/>"
+		"	   <toolitem action='Print'/>"
 		"      <separator/>"
+		"      <toolitem action='Copy'/>"
+		"      <toolitem action='Cut'/>"
 		"      <toolitem action='Borrar'/>"
+		"      <separator/>"
+		"      <toolitem action='Properties'/>"
+		"      <toolitem action='CrearSubdiagrama'/>"
+		"      <toolitem action='ExportarSubdiagrama'/>"
+		"      <separator/>"
+		"		<toolitem action='Validate'/>"
+		"      <toolitem action='Properties'/>"
+		"      <separator/>"
+		"	   <toolitem action='Help'/>"
+		"      <separator/>"
 	    "  </toolbar>"
 	    "</ui>";
 
