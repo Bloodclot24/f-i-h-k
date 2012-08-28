@@ -202,7 +202,7 @@ void BarraDeMenu::cut(){
 		han->cut();
 }
 
-
+/**
 void BarraDeMenu::createSubdiagram(){
 	if ( !m_active)
 		return ;
@@ -210,7 +210,7 @@ void BarraDeMenu::createSubdiagram(){
 	m_selection = handler->duplicateSelection(false);
 	m_tabs->setActive(true);
 }
-
+*/
 
 void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 	if ( !m_active)
@@ -248,17 +248,12 @@ void BarraDeMenu::exportSubdiagram(){
 	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
 }
 
-/*void BarraDeMenu::createSubdiagram(){
+void BarraDeMenu::createSubdiagram(){
 	if ( !m_active)
 		return ;
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
 	SubVentana* subVentanaAnterior = subVentana;
-
-//	AskDiagramName dialog;
-//	std::string subdiagramName = dialog.askName();
-//	VisualComponentSubdiagram* subdiagramaExportado = new VisualComponentSubdiagram(subVentanaAnterior->getDiagram(),
-	//		subVentana->getDiagram(), subdiagramName, han->getSelection(), true);
 
 	m_tabs->agregarSubVentana();
 
@@ -266,18 +261,12 @@ void BarraDeMenu::exportSubdiagram(){
 	han->copy();
 	for(int i = 0; i < han->getSelection()->size(); i++)
 		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
-	std::cout<<"hola K "<< subVentana->getWorkspace()->getDiagram()->getName() << " hola G "<< subVentana->getWorkspace()->getDiagram()->getComponents()->size()<<std::endl;
-	//VisualComponentSubdiagram* subdiagramaImportado = new VisualComponentSubdiagram(subVentana->getDiagram(),
-		//	subVentanaAnterior->getDiagram(), subdiagramName, han->getSelection(), false);
 	han->setDarea(subVentanaAnterior->getWorkspace());
 	han->createSubdiagram();
 	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
 	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
-
-//	subVentana->getWorkspace()->addVisualComponent(subdiagramaImportado);
-//	subVentanaAnterior->getWorkspace()->addVisualComponent(subdiagramaExportado);
 }
-*/
+
 void BarraDeMenu::setActive(bool act){
 	m_active = act;
 }
