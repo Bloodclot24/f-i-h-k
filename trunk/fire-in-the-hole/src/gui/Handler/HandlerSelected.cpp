@@ -206,6 +206,7 @@ std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(bo
 	std::map< VisualCompositeComponent* , VisualCompositeComponent* > index;
 	std::list< VisualComponentVia* > originalVias;
 	std::vector< VisualCompositeComponent* >* newSelection = new std::vector< VisualCompositeComponent* >();
+	int size = m_selection->size();
 	for ( std::vector< VisualCompositeComponent* >::iterator it=m_selection->begin() ; it!=m_selection->end() ; ++it) {
 		VisualCompositeComponent* copy = (*it)->getCopy(*((Workspace*)m_drawArea)->getDiagram());
 		VisualComponentVia* viaCopy = dynamic_cast< VisualComponentVia* >(copy);

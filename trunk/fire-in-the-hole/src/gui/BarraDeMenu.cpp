@@ -217,7 +217,7 @@ void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 		return ;
 
 	int size = m_selection->size();
-	int size1 = handler->getSelection()->size();
+//	int size1 = handler->getSelection()->size();
 	handler->setSelection(m_selection);
 	handler->setDarea(subVentana->getWorkspace());
 	handler->copy();
