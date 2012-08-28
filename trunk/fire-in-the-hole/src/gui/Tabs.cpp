@@ -110,12 +110,18 @@ void Tabs::on_menu_open_proyect() {
 		return;
 	}
 	for (int i = 0; (ent = readdir(directorio)) != NULL; i++) {
-		printf("\n%d:\t %s\t ", i + 1, ent->d_name);
+		std::string archivo(ent->d_name);
+		if(archivo.find("-rep") == archivo.length() - 4 ) {
+		//if(strcmp(archivo.substr(archivo.length() - 4, archivo.length()).c_str(),"-rep") == 0) {
+			std::cout << "Archivo -rep leido: " << archivo << std::endl;
+			XmlReader reader(archivo.c_str());
+			Diagram* circ = new Diagram();
+			agregarSubVentana(circ);
+			subVentanas.back()->getWorkspace()->on_load(reader);
+			set_tab_label_text(*subVentanas.back(), circ->getName());
+		}
 	}
-
 	closedir(directorio);
-
-
 }
 
 void Tabs::on_menu_close_proyect() {
