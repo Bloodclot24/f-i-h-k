@@ -8,7 +8,7 @@
 #include <gtkmm-2.4/gtkmm/messagedialog.h>
 #include <list>
 #include <map>
-
+#include "gui/Tabs.h"
 
 HandlerSelected::HandlerSelected( DrawingAreaPlusPlus* drawArea, std::vector< VisualCompositeComponent* >* selection, bool multipleSelection) :
 Handler(drawArea){
@@ -86,9 +86,9 @@ void HandlerSelected::selectAll(bool select){
 		(*m_selection)[i]->setSelected(select);
 }
 
-void HandlerSelected::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent){
+void HandlerSelected::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs){
 	if ( event->keyval == DELETE)
-		deleteSelection();
+		deleteSelection(tabs);
 }
 
 void HandlerSelected::on_right_click_release_event(GdkEventButton* event, VisualCompositeComponent* touchedComponent){
@@ -114,18 +114,19 @@ void HandlerSelected::on_right_click_release_event(GdkEventButton* event, Visual
 	}
 }
 
-void HandlerSelected::deleteSelection(){
-	eraseSelection();
+void HandlerSelected::deleteSelection(Tabs* tabs){
+	eraseSelection(tabs);
 	m_drawArea->setHandler( new HandlerDefault(m_drawArea));
 }
 
-void HandlerSelected::eraseSelection(){
+void HandlerSelected::eraseSelection(Tabs* tabs){
 	std::vector<VisualCompositeComponent*> resto;
 	//Borra primero las vias porque son las unicas que no tienen conectores propios
 	for ( unsigned i=0 ; i < m_selection->size() ; i++ ) {
 		VisualComponentVia* via = dynamic_cast<VisualComponentVia*>((*m_selection)[i]);
 		if ( via != NULL) {
 			m_drawArea->removeVisualComponent(via);
+			removeFromOtherDiagrams(via,tabs);
 			delete via;
 		} else
 			resto.push_back((*m_selection)[i]);
@@ -138,13 +139,26 @@ void HandlerSelected::eraseSelection(){
 			VisualComponentConector* conector = (VisualComponentConector*) resto[i]->getChildren()[j]; //son everythings conectores
 			if(conector->getVia() != NULL) {
 				m_drawArea->removeVisualComponent(conector->getVia());
+				removeFromOtherDiagrams(conector->getVia(),tabs);
 				delete conector->getVia(); //setea los conectores de los extremos a NULL
 			}
 		}
 		m_drawArea->removeVisualComponent(resto[i]);
+		removeFromOtherDiagrams(resto[i],tabs);
 		delete resto[i];
 	}
 	m_selection->clear();
+}
+
+void HandlerSelected::removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs) {
+	if(tabs != NULL) {
+		for( int j = 0; j < via->getViews().size(); j++) {
+			DrawingAreaPlusPlus* drawArea = tabs->getWorkspace(via->getViews()[j]->getDiagram());
+			if(drawArea != NULL) //TODO: ver como solucionar esto para q no quede colgado, pincharia antes en el get diagram
+				drawArea->removeVisualComponent(via->getViews()[j]);
+			delete via->getViews()[j];
+		}
+	}
 }
 
 bool HandlerSelected::onlyOneComponentSelected() {

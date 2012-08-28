@@ -102,16 +102,3 @@ std::list< Point* >& Via::getPoints(){
 void Via::addPointAtEnd( Point* point){
 	m_points.push_back(point);
 }
-
-bool Via::verifyConnectEntityRelation(){
-
-	if ( strcmp(typeid((*this->getStartConnector()->getFather())).name(),"6Entity") == 0 and strcmp(typeid((*this->getEndConnector()->getFather())).name(),"8Relation") == 0 ){
-		return true;
-	}
-	if ( strcmp(typeid((*this->getStartConnector()->getFather())).name(),"8Relation") == 0 and strcmp(typeid((*this->getEndConnector()->getFather())).name(),"6Entity") == 0 ){
-			return true;
-	}
-	return false;
-
-
-}

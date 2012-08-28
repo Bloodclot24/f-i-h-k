@@ -4,6 +4,7 @@
 #include "gui/Handler/Handler.h"
 #include <gtkmm-2.4/gtkmm/menu.h>
 
+class Tabs;
 
 class HandlerSelected : public Handler {
 
@@ -41,7 +42,7 @@ public:
 	 * @param event
 	 * @param touchedComponent
 	 */
-	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent);
+	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs);
 
 	/**
 	 * @brief despliega el popmenu de opciones sobre la seleccion, o sobre el componente sobre el
@@ -51,7 +52,7 @@ public:
 	 */
 	virtual void on_right_click_release_event(GdkEventButton* event, VisualCompositeComponent* touchedComponent);
 
-	void deleteSelection();
+	void deleteSelection(Tabs* tabs);
 
 	void showProperties();
 
@@ -79,11 +80,11 @@ private:
 	std::vector< VisualCompositeComponent* >* m_selection;
 	bool m_clicked;
 
-
-
 	bool onlyOneComponentSelected();
 
-	void eraseSelection();
+	void eraseSelection(Tabs* tabs = NULL);
+
+	void removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs);
 
 	void selectAll(bool select);
 

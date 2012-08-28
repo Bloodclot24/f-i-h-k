@@ -95,6 +95,7 @@ public:
 		m_active = active;
 	}
 
+	Workspace* getWorkspace(Diagram& diagram);
 };
 
 #endif /* TABS_H_ */

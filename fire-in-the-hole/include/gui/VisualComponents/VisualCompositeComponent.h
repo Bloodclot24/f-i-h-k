@@ -48,6 +48,11 @@ public:
         return m_children;
     }
 
+    std::vector<VisualCompositeComponent*>& getViews()
+    {
+        return m_views;
+    }
+
     virtual VisualCompositeComponent *getCopy(Diagram & diagram)
     {
     	m_diagram = diagram;

@@ -156,7 +156,7 @@ void BarraDeMenu::deleteSelection(){
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
 	if ( han != NULL)
-		han->deleteSelection();
+		han->deleteSelection(m_tabs);
 }
 
 void BarraDeMenu::showProperties(){
