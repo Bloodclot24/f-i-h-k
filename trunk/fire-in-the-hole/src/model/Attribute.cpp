@@ -13,17 +13,19 @@ Attribute::Attribute(const std::string & name, int orientation)
 
 
 Attribute::Attribute(const Attribute & otro) : Component(otro){
-	if(otro.m_name.find(TARGET_ATTRIBUTE) == 0)
-		m_name = TARGET_ATTRIBUTE;
 	initializeConnectors();
+	m_options[0] = otro.m_options[0];
+	m_options[1] = otro.m_options[1];
+	m_options[2] = otro.m_options[2];
 }
 
 
 Attribute& Attribute::operator=(const Attribute& otro) {
-	if(otro.m_name.find(TARGET_ATTRIBUTE) == 0)
-		m_name = TARGET_ATTRIBUTE;
 	Component::operator=(otro);
 	initializeConnectors();
+	m_options[0] = otro.m_options[0];
+	m_options[1] = otro.m_options[1];
+	m_options[2] = otro.m_options[2];
 	return *this;
 }
 
