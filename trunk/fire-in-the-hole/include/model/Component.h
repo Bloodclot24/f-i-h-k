@@ -78,14 +78,14 @@ public:
 	 * Se agrega a si mismo a la coleccion que corresponda en el diagrama
 	 * @param diagram
 	 */
-    virtual void addToDiagram(Diagram &diagram);
+    virtual void addToDiagram(Diagram* diagram);
 
     /**
      * Se busca en la coleccion del diagram que le corresponda y se remueve
      * de la misma
      * @param diagram
      */
-    virtual void removeFromDiagram(Diagram &diagram);
+    virtual void removeFromDiagram(Diagram* diagram);
 
     virtual void update() {
     }

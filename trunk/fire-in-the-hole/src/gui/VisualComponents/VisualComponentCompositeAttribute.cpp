@@ -2,7 +2,7 @@
 #include "gui/SubWindow/DrawingAreaPlusPlus.h"
 #include "gui/SubWindow/ViewModifyAttributeInfoWin.h"
 
-VisualComponentCompositeAttribute::VisualComponentCompositeAttribute( Diagram& diagram) : VisualCompositeComponent(diagram) {
+VisualComponentCompositeAttribute::VisualComponentCompositeAttribute( Diagram* diagram) : VisualCompositeComponent(diagram) {
 	m_component = new CompositeAttribute();
 	initialize();
 }
@@ -12,8 +12,8 @@ VisualComponentCompositeAttribute::VisualComponentCompositeAttribute(const Visua
 	initialize();
 }
 
-VisualCompositeComponent* VisualComponentCompositeAttribute::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentCompositeAttribute::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentCompositeAttribute(*this);
 	m_diagram = origen;

@@ -83,13 +83,13 @@ void Component::deserialize(XmlReader & reader)
 	m_posY = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_POS_Y));
 }
 
-void Component::addToDiagram(Diagram &diagram){
-	std::cout<<"/Agrego  " << getName() << " a "<<diagram.getName()<<"/";
-	diagram.addComponent(this);
+void Component::addToDiagram(Diagram* diagram){
+	std::cout<<"/Agrego  " << getName() << " a "<<diagram->getName()<<"/";
+	diagram->addComponent(this);
 }
 
-void Component::removeFromDiagram(Diagram &diagram){
-	diagram.removeComponent(this);
+void Component::removeFromDiagram(Diagram* diagram){
+	diagram->removeComponent(this);
 }
 
 void Component::setX(unsigned x){

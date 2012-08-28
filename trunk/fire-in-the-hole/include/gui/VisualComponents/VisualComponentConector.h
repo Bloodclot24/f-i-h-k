@@ -10,13 +10,13 @@ class VisualComponentConector: public VisualComponent {
 private:
     bool m_isEntry;
 	int m_number;
-	Diagram& m_diagram;
+	Diagram* m_diagram;
 	Connector* m_connector;
 	VisualComponentVia* m_via;
 	VisualCompositeComponent* m_parent;
 
 public:
-    VisualComponentConector(VisualCompositeComponent *parent, Connector *connector, int nro, bool esEntrada, Diagram & diagram);
+    VisualComponentConector(VisualCompositeComponent *parent, Connector *connector, int nro, bool esEntrada, Diagram* diagram);
     virtual ~VisualComponentConector();
     virtual InfluenceArea getInfluenceArea();
     virtual void on_expose(Cairo::RefPtr<Cairo::Context> ptrContext);

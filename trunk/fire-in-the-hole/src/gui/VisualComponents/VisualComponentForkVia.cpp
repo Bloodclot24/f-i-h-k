@@ -2,7 +2,7 @@
 #include "model/Fork.h"
 #include "gui/Dibujar/AuxiliarDibujar.h"
 
-VisualComponentForkVia::VisualComponentForkVia(Diagram& diagram) : VisualCompositeComponent(diagram) {
+VisualComponentForkVia::VisualComponentForkVia(Diagram* diagram) : VisualCompositeComponent(diagram) {
 	m_component = new Fork();
 	initialize();
 }
@@ -16,8 +16,8 @@ VisualComponentForkVia::~VisualComponentForkVia() {
 
 }
 
-VisualCompositeComponent* VisualComponentForkVia::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentForkVia::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentForkVia(*this);
 	m_diagram = origen;

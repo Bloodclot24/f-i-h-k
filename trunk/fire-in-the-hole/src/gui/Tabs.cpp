@@ -47,7 +47,7 @@ void Tabs::agregarSubVentana(Diagram* diagram) {
 	} else {
 		diagramDefault = diagram;
 	}
-	SubVentana* subVentanaDefault = new SubVentana(*diagramDefault, get_allocation());
+	SubVentana* subVentanaDefault = new SubVentana(diagramDefault, get_allocation());
 	subVentanas.push_back(subVentanaDefault);
 	append_page(*subVentanaDefault, subVentanaDefault->getDiagram()->getName());
 	show_all();
@@ -69,10 +69,10 @@ void Tabs::removerSubVentanaActual() {
 }
 
 void Tabs::on_switch_page_fake(GtkNotebookPage* page, guint page_num) {
-	SubVentana* subventanaAnterior = barraDeMenu.getSubVentana();
+	//SubVentana* subventanaAnterior = barraDeMenu.getSubVentana();
 	barraDeMenu.setSubventana(subVentanas[page_num]);
-	if(m_active)
-		barraDeMenu.switchTabs(subventanaAnterior);
+	//if(m_active)
+	//	barraDeMenu.switchTabs(subventanaAnterior);
 }
 
 void Tabs::on_menu_close() {
@@ -162,6 +162,7 @@ void Tabs::on_menu_save() {
 	if ( get_n_pages () < 1)
 		return;
 
+	int page = get_current_page();
 	Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
 	std::string path = diagram->getPath();
 	if (path.length() == 0)
@@ -212,9 +213,9 @@ void Tabs::on_name_change() {
 	}
 }
 
-Workspace* Tabs::getWorkspace(Diagram& diagram) {
+Workspace* Tabs::getWorkspace(Diagram* diagram) {
 	for( int i = 0; i < subVentanas.size(); i++) {
-		if(subVentanas[i]->getDiagram()->getName() == diagram.getName() )
+		if(subVentanas[i]->getDiagram()->getName() == diagram->getName() ) //TODO
 			return subVentanas[i]->getWorkspace();
 	}
 	return NULL;

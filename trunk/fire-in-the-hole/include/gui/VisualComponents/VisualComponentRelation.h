@@ -7,14 +7,14 @@
 
 class VisualComponentRelation: public VisualCompositeComponent{
 public:
-	VisualComponentRelation( Diagram& diagram);
+	VisualComponentRelation( Diagram* diagram);
 
 	VisualComponentRelation(const VisualComponentRelation& other);
 
 	virtual ~VisualComponentRelation() {
 	}
 
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 

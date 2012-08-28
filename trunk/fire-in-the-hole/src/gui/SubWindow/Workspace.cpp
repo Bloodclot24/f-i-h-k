@@ -11,7 +11,7 @@
 //#include "gtkmm/messagedialog.h"
 #include <iostream>
 using namespace std;
-Workspace::Workspace(Diagram& diagram, bool enableEvents) : DrawingAreaPlusPlus(enableEvents),
+Workspace::Workspace(Diagram* diagram, bool enableEvents) : DrawingAreaPlusPlus(enableEvents),
 	m_diagram(diagram)
 {
 	if ( enableEvents)
@@ -127,8 +127,8 @@ void Workspace::on_load(XmlReader& reader) {
 		Utils utils;
 		//setea atributos del diagram
 		reader.setCurrentNode(reader.getRoot());
-		m_diagram.setName(reader.getCurrentNodeProperty(TARGET_NAME));
-		m_diagram.setSize(utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_X)),
+		m_diagram->setName(reader.getCurrentNodeProperty(TARGET_NAME));
+		m_diagram->setSize(utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_X)),
 				utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_Y)));
 
 		std::map< unsigned, VisualCompositeComponent* > visualComponents;
@@ -217,17 +217,17 @@ VisualCompositeComponent* Workspace::getVisualComponent(Component* comp){
 void Workspace::store(XmlWriter& writer_rep, XmlWriter& writer_comp){
 	Utils utils;
 	updateDiagramSize();
-	writer_rep.addCurrentNodeProperty(TARGET_NAME, m_diagram.getName().c_str());
-	writer_rep.addCurrentNodeProperty(TARGET_SIZE_X, utils.convertToString(m_diagram.getSizeX()).c_str());
-	writer_rep.addCurrentNodeProperty(TARGET_SIZE_Y, utils.convertToString(m_diagram.getSizeY()).c_str());
+	writer_rep.addCurrentNodeProperty(TARGET_NAME, m_diagram->getName().c_str());
+	writer_rep.addCurrentNodeProperty(TARGET_SIZE_X, utils.convertToString(m_diagram->getSizeX()).c_str());
+	writer_rep.addCurrentNodeProperty(TARGET_SIZE_Y, utils.convertToString(m_diagram->getSizeY()).c_str());
 
-	writer_comp.addCurrentNodeProperty(TARGET_NAME, m_diagram.getName().c_str());
+	writer_comp.addCurrentNodeProperty(TARGET_NAME, m_diagram->getName().c_str());
 
-	int size = m_diagram.getComponents()->size();
-	m_diagram.startSerialization();
+	int size = m_diagram->getComponents()->size();
+	m_diagram->startSerialization();
 	for (std::vector<VisualCompositeComponent*>::iterator it = m_visualComponentList.begin(); it != m_visualComponentList.end(); ++it)
 		(*it)->store(writer_rep, writer_comp, m_diagram);
-	m_diagram.finalizeSerialization();
+	m_diagram->finalizeSerialization();
 
 }
 
@@ -253,7 +253,7 @@ void Workspace::updateDiagramSize(){
 
 	m_diagramOffsetX = minX;
 	m_diagramOffsetY = minY;
-	m_diagram.setSize(maxX - minX, maxY - minY);
+	m_diagram->setSize(maxX - minX, maxY - minY);
 }
 
 std::string Workspace::store(){
@@ -264,7 +264,7 @@ std::string Workspace::store(){
 }
 
 Diagram* Workspace::getDiagram(){
-	return &m_diagram;
+	return m_diagram;
 }
 
 void Workspace::printErrorMessage(const Cairo::RefPtr<Cairo::Context>& ptrContext, const std::string& errorMessage, double wrap) {
@@ -289,9 +289,7 @@ void Workspace::validateDiagram(std::string archivo){
 	  filestr.open(archivo.c_str(), std::fstream::out);
 
 	  	if (filestr.is_open())
-	  	{
-	  	m_diagram.validateDiagram(filestr);
-	  	}
+	  	  	m_diagram->validateDiagram(filestr);
 	  	filestr.close();
 
 }

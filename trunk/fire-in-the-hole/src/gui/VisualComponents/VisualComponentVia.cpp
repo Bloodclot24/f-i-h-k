@@ -5,13 +5,13 @@
 #include "model/Fork.h"
 #include "gui/SubWindow/ViewModifyComponentInfoWin.h"
 
-VisualComponentVia::VisualComponentVia(Diagram& diagram) :
+VisualComponentVia::VisualComponentVia(Diagram* diagram) :
 VisualCompositeComponent(diagram){
 	m_component = new Via();
 	initialize();
 }
 
-VisualComponentVia::VisualComponentVia(VisualComponentConector* start, Diagram& diagram, VisualComponentConector* end) :
+VisualComponentVia::VisualComponentVia(VisualComponentConector* start, Diagram* diagram, VisualComponentConector* end) :
 VisualCompositeComponent(diagram){
 	m_component = new Via();
 	setStartConector(start);
@@ -221,15 +221,15 @@ void VisualComponentVia::initializeSegments(){
 }
 
 
-void VisualComponentVia::load(XmlReader& reader, Diagram & diagram){
+void VisualComponentVia::load(XmlReader& reader, Diagram* diagram){
 	VisualCompositeComponent::load(reader, diagram);
 	initializeSegments();
 }
 
 void VisualComponentVia::invertConnections(){ }
 
-VisualCompositeComponent* VisualComponentVia::getCopy(Diagram & diagram){
-	Diagram & origen = m_diagram;
+VisualCompositeComponent* VisualComponentVia::getCopy(Diagram* diagram){
+	Diagram* origen = m_diagram;
 	m_diagram = diagram;
 	VisualCompositeComponent* comp = new VisualComponentVia(*this);
 	m_diagram = origen;

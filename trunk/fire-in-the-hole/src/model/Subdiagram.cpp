@@ -54,10 +54,10 @@ void Subdiagram::deserialize(XmlReader & reader)
 	*/
 }
 
-void Subdiagram::addToDiagram(Diagram &diagram){
-	diagram.addChip(this);
+void Subdiagram::addToDiagram(Diagram* diagram){
+	diagram->addChip(this);
 }
 
-void Subdiagram::removeFromDiagram(Diagram &diagram){
-	diagram.removeChip(this);
+void Subdiagram::removeFromDiagram(Diagram* diagram){
+	diagram->removeChip(this);
 }

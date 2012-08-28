@@ -64,6 +64,7 @@ public:
 
 	void setDarea(DrawingAreaPlusPlus* drawArea) {
 		m_drawArea = drawArea;
+		std::cout << "lalala" << std::endl;
 	}
 
 	std::vector< VisualCompositeComponent* >* getSelection() {

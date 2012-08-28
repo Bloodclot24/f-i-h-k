@@ -12,22 +12,22 @@ private:
 	void crear();
 public:
 
-	VisualComponentSubdiagram( Diagram& diagram, const std::string & xml = "");
+	VisualComponentSubdiagram(Diagram* diagram, const std::string & xml = "");
 
-	VisualComponentSubdiagram( Diagram* diagram, Diagram* sourceDiagram, const std::string & name, std::vector< VisualCompositeComponent* >* components, bool source);
+	VisualComponentSubdiagram(Diagram* diagram, Diagram* sourceDiagram, const std::string & name, std::vector< VisualCompositeComponent* >* components, bool source);
 
 	VisualComponentSubdiagram(const VisualComponentSubdiagram& other);
 
 	virtual ~VisualComponentSubdiagram() {
 	}
 
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	virtual InfluenceArea getInfluenceArea();
 
 	virtual void draw(Cairo::RefPtr<Cairo::Context> ptrContext);
 
-	virtual void load(XmlReader& reader, Diagram & diagram);
+	virtual void load(XmlReader& reader, Diagram* diagram);
 
 	Subdiagram* getSubdiagram(){
 		return (Subdiagram *) m_component;

@@ -9,14 +9,14 @@
 class VisualComponentEntity: public VisualCompositeComponent{
 
 public:
-	VisualComponentEntity(Diagram& diagram);
+	VisualComponentEntity(Diagram* diagram);
 
 	VisualComponentEntity(const VisualComponentEntity& other);
 
 	virtual ~VisualComponentEntity() {
 	}
 
-	virtual VisualCompositeComponent* getCopy(Diagram & diagram);
+	virtual VisualCompositeComponent* getCopy(Diagram* diagram);
 
 	virtual void draw(Cairo::RefPtr<Cairo::Context> ptrContext);
 
