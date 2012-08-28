@@ -55,7 +55,7 @@ public:
 
 	void showProperties();
 
-	void copy();
+	void copy(bool add = false);
 
 	void cut();
 

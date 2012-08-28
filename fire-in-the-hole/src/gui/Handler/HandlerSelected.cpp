@@ -157,13 +157,12 @@ bool HandlerSelected::onlyOneComponentSelected() {
 }
 
 void HandlerSelected::showProperties(){
-	if ( m_selection->size() >= 1){
+	if ( m_selection->size() >= 1)
 		m_selection->at(0)->showProperties();
-	}
 	m_drawArea->reDraw();
 }
 
-void HandlerSelected::copy(){
+void HandlerSelected::copy(bool add){
 	std::vector< VisualCompositeComponent* >* newSelection = duplicateSelection();
 	selectAll(false);
 	delete m_selection;
@@ -173,7 +172,6 @@ void HandlerSelected::copy(){
 	//flags de control de seniales.
 	m_popupCalledBefore = false;
 	m_clicked = true;
-
 }
 
 void HandlerSelected::cut(){
@@ -186,20 +184,14 @@ void HandlerSelected::cut(){
 	//flags de control de seniales.
 	m_popupCalledBefore = false;
 	m_clicked = true;
-
 }
 
 void HandlerSelected::createSubdiagram(){
-	//std::vector< VisualCompositeComponent* >* newSelection = duplicateSelection();
 	selectAll(false);
-	//delete m_selection;
-	//m_selection = newSelection;
-	//selectAll(true); ver flags
 	m_drawArea->reDraw();
 	//flags de control de seniales.
 	m_popupCalledBefore = false;
 	m_clicked = true;
-
 }
 
 std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(bool add){

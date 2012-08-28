@@ -12,7 +12,7 @@
 #include "utils/Settings.h"
 
 BarraDeHerramientas::BarraDeHerramientas() : Gtk::VButtonBox(Gtk::BUTTONBOX_START) {
-	std::string buttonNames[] = { "ATRIBUTO", "RELACION", "ENTIDAD", "AT_COMPUESTO", "FORK"};
+	std::string buttonNames[] = { "ENTIDAD", "RELACION", "ATRIBUTO", "AT_COMPUESTO", "JERARQUIA"};
 	unsigned size = CANTIDAD_BOTONES;
 
 	std::string pathToImages = Settings::getInstance().getValue("ImagesPath");
@@ -26,14 +26,14 @@ BarraDeHerramientas::BarraDeHerramientas() : Gtk::VButtonBox(Gtk::BUTTONBOX_STAR
 		m_buttons[i].set_image(*m_images[i]);
 	}
 
-	m_buttons[0].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentAttribute>));
+	m_buttons[0].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentEntity>));
 	m_buttons[1].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentRelation>));
-	m_buttons[2].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentEntity>));
+	m_buttons[2].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentAttribute>));
 	m_buttons[3].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentCompositeAttribute>));
 	m_buttons[4].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentForkVia>));
 
 	//Se agregan los botones "especiales".
-	pack_start(m_diagramButton, false, false, 0);
+	//pack_start(m_diagramButton, false, false, 0);
 }
 
 BarraDeHerramientas::~BarraDeHerramientas() {

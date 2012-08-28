@@ -16,6 +16,8 @@ public:
 	Fork& operator=(const Fork&);
 
 	virtual void serialize(XmlWriter & writer_rep, XmlWriter & writer_comp);
+
+	virtual void update();
 };
 
 #endif /* FORK_H_ */

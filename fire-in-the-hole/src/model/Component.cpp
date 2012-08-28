@@ -112,9 +112,11 @@ void Component::validate(std::fstream & filestr, bool &valido){
 
 	std::string aux;
 	aux= typeid((*this)).name();
-	std::cout<<aux;
+
 	int cantAtr=0;
 	int cantEnt=0;
+	int cantForkEnt=0;
+	int cantForkNoEnt=0;
 
 	aux.erase(std::remove_if(aux.begin(), aux.end(), &isdigit), aux.end());
 
@@ -178,6 +180,37 @@ void Component::validate(std::fstream & filestr, bool &valido){
 			valido = false;
 		}
 	}
+	if (!m_attributes.empty()) {
+			filestr
+					<< "<H2>        Error: El Fork no puede tener atributos conectados"
+					<< "</H2>";
+			valido = false;
+		}
+		for (std::vector<Entity*>::iterator it = m_entities.begin(); it
+				!= m_entities.end(); ++it) {
+			std::string str = typeid((**it)).name();
+			str.erase(std::remove_if(str.begin(), str.end(), &isdigit),
+					str.end());
+
+			//                                              (*it)->getExitConnectors()->at(0)->getFather();
+			// UnFork deberia solo estar unido a entidades
+			if (strcmp(str.c_str(), "Entity") == 0)
+				cantForkEnt++;
+			else
+				cantForkNoEnt++;
+		}
+		if (cantForkNoEnt != 0) {
+			filestr
+					<< "<H2>        Error: El Fork tiene elementos conectados que no son entidades"
+					<< "</H2>";
+			valido = false;
+		}
+		if (cantForkEnt <= 2) {
+			filestr
+					<< "<H2>        Error: El Fork tiene que estar conectado al menos a 3 entidades"
+					<< "</H2>";
+			valido = false;
+		}
 
 	if (  strcmp(aux.c_str(),"Attribute") == 0 ) {
 		Connector* con = this->m_exitConnectors[0];
