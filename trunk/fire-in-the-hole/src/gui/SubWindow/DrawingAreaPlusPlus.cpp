@@ -147,11 +147,11 @@ bool DrawingAreaPlusPlus::on_key_release_event(GdkEventKey* event) {
 	return true;
 }
 
-bool DrawingAreaPlusPlus::on_key_press_event(GdkEventKey* event){
+bool DrawingAreaPlusPlus::on_key_press_event(GdkEventKey* event, Tabs* tabs){
 	if ( m_editable){
 		int x,y;
 		get_pointer(x,y);
-		m_handler->on_key_press_event(event, getTouchedVisualComponent(x, y));
+		m_handler->on_key_press_event(event, getTouchedVisualComponent(x, y), tabs);
 	}
 	return true;
 }

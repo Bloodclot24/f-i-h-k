@@ -189,7 +189,7 @@ bool Tabs::on_key_release_event(GdkEventKey* event) {
 
 bool Tabs::on_key_press_event(GdkEventKey* event){
 	if (get_n_pages () > 0)
-		subVentanas[get_current_page()]->getWorkspace()->on_key_press_event(event);
+		subVentanas[get_current_page()]->getWorkspace()->on_key_press_event(event, this);
 	return false;
 }
 
@@ -210,4 +210,12 @@ void Tabs::on_name_change() {
 			label->set_text(diagramName);
 		}
 	}
+}
+
+Workspace* Tabs::getWorkspace(Diagram& diagram) {
+	for( int i = 0; i < subVentanas.size(); i++) {
+		if(subVentanas[i]->getDiagram()->getName() == diagram.getName() )
+			return subVentanas[i]->getWorkspace();
+	}
+	return NULL;
 }

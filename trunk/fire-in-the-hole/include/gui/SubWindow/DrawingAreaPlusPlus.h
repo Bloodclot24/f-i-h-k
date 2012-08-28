@@ -15,6 +15,7 @@
 #include <gtkmm/uimanager.h>
 #include <gtkmm/menu.h>
 
+class Tabs;
 class VisualCompositeComponent;
 class VisualComponentSegment;
 
@@ -144,7 +145,7 @@ public:
 
 	virtual bool on_key_release_event(GdkEventKey* event);
 
-	virtual bool on_key_press_event(GdkEventKey* event);
+	virtual bool on_key_press_event(GdkEventKey* event, Tabs* tabs);
 	/**
 	 * Prepara el context con lo que se mostraria en la drawing area.
 	 *

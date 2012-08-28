@@ -65,8 +65,6 @@ public:
 
     Connector* m_startConnector;
     Connector* m_endConnector;
-
-    bool verifyConnectEntityRelation();
 };
 
 #endif /* VIA_H_ */
