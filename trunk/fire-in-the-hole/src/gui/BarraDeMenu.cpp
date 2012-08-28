@@ -202,21 +202,27 @@ void BarraDeMenu::cut(){
 		han->cut();
 }
 
-/*
+
 void BarraDeMenu::createSubdiagram(){
 	if ( !m_active)
 		return ;
 	handler = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
+	m_selection = handler->duplicateSelection(false);
 	m_tabs->setActive(true);
 }
-*/
+
 
 void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 	if ( !m_active)
 		return ;
 
+	int size = m_selection->size();
+	int size1 = handler->getSelection()->size();
+	handler->setSelection(m_selection);
 	handler->setDarea(subVentana->getWorkspace());
 	handler->copy();
+	for(int i = 0; i < handler->getSelection()->size(); i++)
+		subVentana->getWorkspace()->getDiagram()->addComponent((*handler->getSelection())[i]->getComponent());
 	handler->setDarea(subVentanaAnterior->getWorkspace());
 	handler->createSubdiagram();
 	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
@@ -242,7 +248,7 @@ void BarraDeMenu::exportSubdiagram(){
 	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
 }
 
-void BarraDeMenu::createSubdiagram(){
+/*void BarraDeMenu::createSubdiagram(){
 	if ( !m_active)
 		return ;
 
@@ -271,7 +277,7 @@ void BarraDeMenu::createSubdiagram(){
 //	subVentana->getWorkspace()->addVisualComponent(subdiagramaImportado);
 //	subVentanaAnterior->getWorkspace()->addVisualComponent(subdiagramaExportado);
 }
-
+*/
 void BarraDeMenu::setActive(bool act){
 	m_active = act;
 }

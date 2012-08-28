@@ -202,7 +202,7 @@ void HandlerSelected::createSubdiagram(){
 
 }
 
-std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(){
+std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(bool add){
 	std::map< VisualCompositeComponent* , VisualCompositeComponent* > index;
 	std::list< VisualComponentVia* > originalVias;
 	std::vector< VisualCompositeComponent* >* newSelection = new std::vector< VisualCompositeComponent* >();
@@ -219,7 +219,8 @@ std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(){
 				continue;
 		}
 		newSelection->push_back(copy);
-		m_drawArea->addVisualComponent(copy);
+		if(add)
+			m_drawArea->addVisualComponent(copy);
 		index[(*it)] = copy;
 	}
 
