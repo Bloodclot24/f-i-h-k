@@ -16,13 +16,13 @@ Tabs::Tabs(BarraDeMenu& barraDeMenu) : barraDeMenu(barraDeMenu) {
 	set_scrollable(true);
 	signal_switch_page().connect(sigc::mem_fun(this, &Tabs::on_switch_page_fake));
 	Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup = Gtk::ActionGroup::create();
-	m_refActionGroup->add( Gtk::Action::create("NewProyect", Gtk::Stock::NEW), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
+	m_refActionGroup->add( Gtk::Action::create("NewProyect", "New Proyect"), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
 	m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW), sigc::mem_fun(this, &Tabs::on_menu_new));
-	m_refActionGroup->add( Gtk::Action::create("OpenProyect", Gtk::Stock::NEW), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
+	m_refActionGroup->add( Gtk::Action::create("OpenProyect", "Open Proyect"), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
 	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN), sigc::mem_fun(this, &Tabs::on_menu_open));
 	m_refActionGroup->add( Gtk::Action::create("Save", Gtk::Stock::SAVE), sigc::mem_fun(this, &Tabs::on_menu_save));
 	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS), sigc::mem_fun(this, &Tabs::on_menu_save_as));
-	m_refActionGroup->add( Gtk::Action::create("CloseProyect", Gtk::Stock::CLOSE), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
+	m_refActionGroup->add( Gtk::Action::create("CloseProyect", "Close Proyect"), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
 	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE), sigc::mem_fun(this, &Tabs::on_menu_close));
 	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", "Renombrar diagrama"), sigc::mem_fun(this, &Tabs::on_name_change));
 
