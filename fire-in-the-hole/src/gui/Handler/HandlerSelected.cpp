@@ -163,7 +163,7 @@ void HandlerSelected::showProperties(){
 }
 
 void HandlerSelected::copy(bool add){
-	std::vector< VisualCompositeComponent* >* newSelection = duplicateSelection();
+	std::vector< VisualCompositeComponent* >* newSelection = duplicateSelection(add);
 	selectAll(false);
 	delete m_selection;
 	m_selection = newSelection;
@@ -200,6 +200,8 @@ std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(bo
 	std::vector< VisualCompositeComponent* >* newSelection = new std::vector< VisualCompositeComponent* >();
 	for ( std::vector< VisualCompositeComponent* >::iterator it=m_selection->begin() ; it!=m_selection->end() ; ++it) {
 		VisualCompositeComponent* copy = (*it)->getCopy(*((Workspace*)m_drawArea)->getDiagram());
+		if(add)
+			(*it)->addView(copy);
 		VisualComponentVia* viaCopy = dynamic_cast< VisualComponentVia* >(copy);
 		// si los conectores de la via estan seleccionados ==> esta se debe copiar.
 		if ( viaCopy != NULL ){
@@ -211,8 +213,7 @@ std::vector< VisualCompositeComponent* >* HandlerSelected::duplicateSelection(bo
 				continue;
 		}
 		newSelection->push_back(copy);
-		if(add)
-			m_drawArea->addVisualComponent(copy);
+		m_drawArea->addVisualComponent(copy);
 		index[(*it)] = copy;
 	}
 

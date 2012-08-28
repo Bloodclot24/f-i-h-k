@@ -233,7 +233,7 @@ void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 //	int size1 = handler->getSelection()->size();
 	handler->setSelection(m_selection);
 	handler->setDarea(subVentana->getWorkspace());
-	handler->copy();
+	handler->copy(true);
 	for(int i = 0; i < handler->getSelection()->size(); i++)
 		subVentana->getWorkspace()->getDiagram()->addComponent((*handler->getSelection())[i]->getComponent());
 	handler->setDarea(subVentanaAnterior->getWorkspace());
@@ -252,7 +252,7 @@ void BarraDeMenu::exportSubdiagram(){
 	SubVentana* subVentanaAnterior = subVentana;
 	m_tabs->on_menu_open();
 	han->setDarea(subVentana->getWorkspace());
-	han->copy();
+	han->copy(true);
 	for(int i = 0; i < han->getSelection()->size(); i++)
 		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
 	han->setDarea(subVentanaAnterior->getWorkspace());
@@ -271,7 +271,7 @@ void BarraDeMenu::createSubdiagram(){
 	m_tabs->agregarSubVentana();
 
 	han->setDarea(subVentana->getWorkspace());
-	han->copy();
+	han->copy(true);
 	for(int i = 0; i < han->getSelection()->size(); i++)
 		subVentana->getWorkspace()->getDiagram()->addComponent((*han->getSelection())[i]->getComponent());
 	han->setDarea(subVentanaAnterior->getWorkspace());

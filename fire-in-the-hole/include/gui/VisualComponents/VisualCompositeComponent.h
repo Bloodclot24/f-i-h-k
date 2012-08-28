@@ -41,6 +41,7 @@ public:
     virtual int getY() const;
     Diagram & getDiagram();
     void addChild(VisualComponent *child);
+    void addView(VisualCompositeComponent *view);
 
     std::vector<VisualComponent*>& getChildren()
     {
@@ -55,6 +56,7 @@ public:
 
 protected:
     std::vector<VisualComponent*> m_children;
+    std::vector< VisualCompositeComponent* > m_views;
     Component *m_component;
     Diagram & m_diagram;
     void initialize();
@@ -79,6 +81,8 @@ protected:
 	}
 
     void serializedAttributes(XmlWriter & xml, Diagram* diagram, Component* component);
+
+    void update();
 
 };
 

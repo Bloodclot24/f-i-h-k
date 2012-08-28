@@ -230,4 +230,3 @@ void DrawingAreaPlusPlus::drawSelection(const Cairo::RefPtr<Cairo::Context> ptrC
 	ptrContext->stroke();
 	ptrContext->restore();
 }
-

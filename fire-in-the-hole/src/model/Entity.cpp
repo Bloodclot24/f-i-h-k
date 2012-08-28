@@ -76,12 +76,10 @@ void Entity::update()
 	for(unsigned i = 0; i < m_entryConnectors.size(); i++){
 		if(m_entryConnectors[i]->getVia() != NULL) {
 			Via* via = m_entryConnectors[i]->getVia();
-			if(via->getEndConnector() != m_entryConnectors[i]){
+			if(via->getEndConnector() != m_entryConnectors[i])
 				m_attributes.push_back((Attribute*)via->getEndConnector()->getFather());
-			}
-			else{
+			else
 				m_attributes.push_back((Attribute*)via->getStartConnector()->getFather());
-			}
 		}
 	}
 }
