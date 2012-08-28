@@ -110,7 +110,7 @@ void Tabs::on_menu_open_proyect() {
 		return;
 	}
 	for (int i = 0; (ent = readdir(directorio)) != NULL; i++) {
-		std::string archivo(ent->d_name);
+		std::string archivo = proyectPath + "/" + ent->d_name;
 		if(archivo.find("-rep") == archivo.length() - 4 ) {
 		//if(strcmp(archivo.substr(archivo.length() - 4, archivo.length()).c_str(),"-rep") == 0) {
 			std::cout << "Archivo -rep leido: " << archivo << std::endl;
@@ -136,6 +136,7 @@ void Tabs::on_menu_open() {
 	fileChooser.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
 	int resultado = fileChooser.run();
 	if (resultado == Gtk::RESPONSE_OK) {
+		std::cout<<"archivo: " << fileChooser.get_filename() << std::endl;
 		XmlReader reader(fileChooser.get_filename().c_str());
 		Diagram* circ = new Diagram();
 		agregarSubVentana(circ);
