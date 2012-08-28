@@ -34,6 +34,10 @@ void VisualCompositeComponent::addChild(VisualComponent* child) {
 	m_children.push_back(child);
 }
 
+void VisualCompositeComponent::addView(VisualCompositeComponent* view) {
+	m_views.push_back(view);
+}
+
 void VisualCompositeComponent::removeChild(VisualComponent* child) {
 	for (std::vector<VisualComponent*>::iterator it = m_children.begin(); it != m_children.end(); ++it)
 		if ((*it) == child) {
@@ -43,6 +47,7 @@ void VisualCompositeComponent::removeChild(VisualComponent* child) {
 }
 
 void VisualCompositeComponent::on_expose(Cairo::RefPtr<Cairo::Context> ptrContext) {
+	update();
 	draw(ptrContext);
 }
 
@@ -135,4 +140,19 @@ void VisualCompositeComponent::serializedAttributes(XmlWriter & xml, Diagram * d
 			xml.addProperty(nodoActual, TARGET_NAME, (*it)->getName().c_str());
 		}
 	}
+}
+
+void VisualCompositeComponent::update(){
+	for (std::vector<VisualCompositeComponent*>::iterator it = m_views.begin(); it != m_views.end(); ++it) {
+		Component* viewComp = (*it)->getComponent();
+		viewComp->setName(m_component->getName());
+		viewComp->setType(m_component->getType());
+		viewComp->setExpression(m_component->getExpression());
+		if(viewComp->getOptions().size() > 0) {
+			viewComp->getOptions()[0] = m_component->getOptions()[0];
+			viewComp->getOptions()[1] = m_component->getOptions()[1];
+			viewComp->getOptions()[2] = m_component->getOptions()[2];
+		}
+	}
+
 }
