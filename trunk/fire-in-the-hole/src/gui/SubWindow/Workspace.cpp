@@ -9,8 +9,10 @@
 #include "model/Utils.h"
 #include "xml/XmlReader.h"
 //#include "gtkmm/messagedialog.h"
+#include "gui/Tabs.h"
 #include <iostream>
 using namespace std;
+
 Workspace::Workspace(Diagram* diagram, bool enableEvents) : DrawingAreaPlusPlus(enableEvents),
 	m_diagram(diagram)
 {
@@ -121,7 +123,7 @@ void Workspace::on_draw_page(const Glib::RefPtr<Gtk::PrintContext>& context,
 	}
 }
 
-void Workspace::on_load(XmlReader& reader) {
+void Workspace::on_load(XmlReader& reader, Tabs* tabs) {
 
 	try{
 		Utils utils;
@@ -163,15 +165,26 @@ void Workspace::on_load(XmlReader& reader) {
 				int identificador = utils.convertToInt(reader.getCurrentNodeProperty(TARGET_ID));
 				visualComponents[identificador] = visualComponent;
 
+				std::vector<Views> views;
 				std::vector<int> ids;
 				xmlNode* nodoActual = reader.getCurrentNodeChild();
 				while(nodoActual){
 					reader.setCurrentNode(nodoActual);
-					if(strcmp(reader.getCurrentNodeName(), TARGET_PUNTO) != 0)
+					if(strcmp(reader.getCurrentNodeName(), TARGET_PUNTO) != 0 && strcmp(reader.getCurrentNodeName(), TARGET_OTHER_DIAGRAM) != 0)
 						ids.push_back(utils.convertToInt(reader.getCurrentNodeProperty(TARGET_ID)));
+					if(strcmp(reader.getCurrentNodeName(), TARGET_OTHER_DIAGRAM) == 0){
+						Views view;
+						view.name = reader.getCurrentNodeProperty(TARGET_NAME);
+						view.id = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_ID));
+						views.push_back(view);
+					}
 					nodoActual = reader.nextNode();
 				}
 				idsComponentesEntradas[identificador] =  ids;
+				for(int i = 0 ; i < views.size() ; i++) {
+					Workspace* workspace = tabs->getWorkspace(views[i].name);
+					visualComponent->addView(workspace->getVisualCompositeComponent(views[i].id));
+				}
 			}
 
 			reader.setCurrentNode(nodoAnterior);
@@ -254,13 +267,6 @@ void Workspace::updateDiagramSize(){
 	m_diagramOffsetX = minX;
 	m_diagramOffsetY = minY;
 	m_diagram->setSize(maxX - minX, maxY - minY);
-}
-
-std::string Workspace::store(){
-	XmlWriter xml_rep("diagram");
-	XmlWriter xml_comp("diagram");
-	store(xml_rep, xml_comp);
-	return xml_rep.toString();
 }
 
 Diagram* Workspace::getDiagram(){

@@ -15,6 +15,8 @@
 #include "../VisualComponents/VisualComponentEntity.h"
 #include <fstream>
 #include <iostream>
+
+class Tabs;
 /**
  * @brief Lugar donde efectivamente se interactua con los VisualComponents.
  */
@@ -69,11 +71,9 @@ public:
 	/**
 	 * Se llama al cargar un nuevo diagrama, debe instanciar los componentes.
 	 */
-	void on_load(XmlReader& reader);
+	void on_load(XmlReader& reader, Tabs* tabs);
 
 	void store(XmlWriter& writer_rep, XmlWriter& writer_comp);
-	std::string store();
-
 
 	VisualCompositeComponent* getVisualComponent(Component*);
 
@@ -100,6 +100,10 @@ public:
 	void getPageSize(double& sizeX, double& sizeY) {
 		sizeY = m_refPageSetup->get_page_height(Gtk::UNIT_POINTS);
 		sizeX = m_refPageSetup->get_page_width(Gtk::UNIT_POINTS);
+	}
+
+	VisualCompositeComponent* getVisualCompositeComponent(unsigned id) {
+		return m_visualComponentList[id];
 	}
 
 };

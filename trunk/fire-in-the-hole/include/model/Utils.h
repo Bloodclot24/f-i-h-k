@@ -30,6 +30,12 @@
 #define TARGET_ID_2 "id2"
 #define TARGET_OTHER_DIAGRAM "other_diagram"
 
+class Views {
+public:
+	std::string name;
+	int id;
+};
+
 /**
  * Clase utilizada durante la persistencia para transformar
  * tipos de datos
