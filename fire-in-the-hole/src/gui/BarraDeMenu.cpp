@@ -152,7 +152,7 @@ void BarraDeMenu::deleteSelection(){
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
 	if ( han != NULL)
-		han->deleteSelection(m_tabs);
+		han->deleteSelection();
 }
 
 void BarraDeMenu::showProperties(){
@@ -208,20 +208,6 @@ void BarraDeMenu::cut(){
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
 	if ( han != NULL)
 		han->cut();
-}
-
-
-void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
-	if ( !m_active)
-		return ;
-
-	handler->setDarea(subVentana->getWorkspace());
-	handler->copy(true);
-	handler->setDarea(subVentanaAnterior->getWorkspace());
-	handler->createSubdiagram();
-	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
-	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
-	m_tabs->setActive(false);
 }
 
 void BarraDeMenu::exportSubdiagram(){

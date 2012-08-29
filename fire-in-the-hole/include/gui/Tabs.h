@@ -16,7 +16,6 @@ class Tabs : public Gtk::Notebook {
 private:
 	BarraDeMenu& barraDeMenu;
 	std::vector<SubVentana*> subVentanas;
-	bool m_active;
 	std::string m_proyectName;
 
 	void save_all();
@@ -92,18 +91,9 @@ public:
 
 	Workspace* getCurrentWorkspace();
 
-	void setActive(bool active) {
-		m_active = active;
-	}
-
 	Workspace* getWorkspace(Diagram* diagram);
-	Workspace* getWorkspace(std::string name) {
-		for(unsigned i = 0; i < subVentanas.size(); i++){
-			if(strcmp(subVentanas[i]->getDiagram()->getName().c_str(),name.c_str()) == 0)
-				return subVentanas[i]->getWorkspace();
-		}
-		return NULL;
-	}
+
+	Workspace* getWorkspace(std::string name);
 };
 
 #endif /* TABS_H_ */

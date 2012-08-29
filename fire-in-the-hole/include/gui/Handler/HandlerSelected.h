@@ -42,7 +42,7 @@ public:
 	 * @param event
 	 * @param touchedComponent
 	 */
-	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs);
+	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent);
 
 	/**
 	 * @brief despliega el popmenu de opciones sobre la seleccion, o sobre el componente sobre el
@@ -52,7 +52,7 @@ public:
 	 */
 	virtual void on_right_click_release_event(GdkEventButton* event, VisualCompositeComponent* touchedComponent);
 
-	void deleteSelection(Tabs* tabs);
+	void deleteSelection();
 
 	void showProperties();
 
@@ -74,9 +74,7 @@ private:
 
 	bool onlyOneComponentSelected();
 
-	void eraseSelection(Tabs* tabs = NULL);
-
-	void removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs, bool isVia);
+	void eraseSelection();
 
 	void selectAll(bool select);
 

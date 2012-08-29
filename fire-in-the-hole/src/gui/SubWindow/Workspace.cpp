@@ -232,10 +232,8 @@ void Workspace::store(XmlWriter& writer_rep, XmlWriter& writer_comp){
 
 	writer_comp.addCurrentNodeProperty(TARGET_NAME, m_diagram->getName().c_str());
 
-	m_diagram->startSerialization();
 	for (std::vector<VisualCompositeComponent*>::iterator it = m_visualComponentList.begin(); it != m_visualComponentList.end(); ++it)
 		(*it)->store(writer_rep, writer_comp, m_diagram);
-	m_diagram->finalizeSerialization();
 
 }
 
