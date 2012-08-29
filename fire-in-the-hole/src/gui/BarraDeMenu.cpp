@@ -2,7 +2,6 @@
 #include <gtkmm/stock.h>
 #include "gui/Handler/HandlerSelected.h"
 #include "gui/SubWindow/AskDiagramName.h"
-#include "gui/VisualComponents/VisualComponentSubdiagram.h"
 #include "model/Diagram.h"
 #include "gui/Handler/HandlerDefault.h"
 #include "gui/About.h"

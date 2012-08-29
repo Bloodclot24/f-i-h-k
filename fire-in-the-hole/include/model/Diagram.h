@@ -11,7 +11,6 @@
 #include "model/Relation.h"
 #include "model/Via.h"
 #include "model/Attribute.h"
-#include "model/Subdiagram.h"
 #include <fstream>
 
 class Diagram {
