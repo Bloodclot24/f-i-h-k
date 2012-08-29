@@ -40,9 +40,6 @@ public:
     void addComponent(Component *component);
     void removeComponent(Component*);
 
-//    void deserialize(XmlReader & reader);
-//    void deserialize(const std::string & str);
-
     void validateDiagram(std::fstream & filestr);
 
 	void serializeConnectedComponents(Component* component, XmlWriter & writer);
