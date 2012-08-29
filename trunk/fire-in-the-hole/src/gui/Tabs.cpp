@@ -96,28 +96,33 @@ void Tabs::on_menu_new_proyect() {
 
 void Tabs::on_menu_open_proyect() {
 	on_menu_close_proyect();
-	AskDiagramName dialog("Nombre del proyecto");
-	m_proyectName = dialog.askName();
-	std::string proyectPath = Settings::getInstance().getValue("DiagramsPath") + m_proyectName;
+	Gtk::FileChooserDialog fileChooser("Elegir proyecto", Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+	fileChooser.resize(600,450);
+	fileChooser.set_current_folder(Settings::getInstance().getValue("DiagramsPath"));
+	fileChooser.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	fileChooser.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+	int resultado = fileChooser.run();
+	if (resultado == Gtk::RESPONSE_OK) {
+		std::string proyectPath = fileChooser.get_filename();
+		DIR * directorio;
+		struct dirent * ent;
 
-	DIR * directorio;
-	struct dirent * ent;
-
-	if ((directorio = opendir(proyectPath.c_str())) == NULL) {
-		printf("No puedo abir el directorio \n");
-		return;
-	}
-	for (int i = 0; (ent = readdir(directorio)) != NULL; i++) {
-		std::string archivo = proyectPath + "/" + ent->d_name;
-		if(archivo.find("-rep") == archivo.length() - 4 ) {
-			XmlReader reader(archivo.c_str());
-			Diagram* circ = new Diagram();
-			agregarSubVentana(circ);
-			subVentanas.back()->getWorkspace()->on_load(reader, this);
-			set_tab_label_text(*subVentanas.back(), circ->getName());
+		if ((directorio = opendir(proyectPath.c_str())) == NULL) {
+			printf("No puedo abir el directorio \n");
+			return;
 		}
+		for (int i = 0; (ent = readdir(directorio)) != NULL; i++) {
+			std::string archivo = proyectPath + "/" + ent->d_name;
+			if(archivo.find("-rep") == archivo.length() - 4 ) {
+				XmlReader reader(archivo.c_str());
+				Diagram* circ = new Diagram();
+				agregarSubVentana(circ);
+				subVentanas.back()->getWorkspace()->on_load(reader, this);
+				set_tab_label_text(*subVentanas.back(), circ->getName());
+			}
+		}
+		closedir(directorio);
 	}
-	closedir(directorio);
 }
 
 void Tabs::on_menu_close_proyect() {
