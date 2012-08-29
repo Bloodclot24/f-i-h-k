@@ -51,6 +51,7 @@ void VisualComponentForkVia::draw(Cairo::RefPtr<Cairo::Context> ptrContext){
 	ptrContext->restore();
 	VisualCompositeComponent::draw( ptrContext);
 	Draw draw;
-	draw.writeTextInContext(ptrContext, x + (DIST_FORK + CONECTOR_RADIUS) / 1.9, y + (DIST_FORK) / 2, m_component->getName(), COLOR_IN_TEXT);
+	if(m_component->getName() != "jerarquia")
+		draw.writeTextInContext(ptrContext, x + (DIST_FORK + CONECTOR_RADIUS) / 1.9, y + (DIST_FORK) / 2, m_component->getName(), COLOR_IN_TEXT);
 
 }
