@@ -21,8 +21,6 @@ public:
     virtual InfluenceArea getInfluenceArea();
     virtual void on_expose(Cairo::RefPtr<Cairo::Context> ptrContext);
     virtual void on_move(int mouseX, int mouseY);
-    int getNumber();
-    bool isConnected();
     VisualCompositeComponent *getParent();
     virtual void draw(Cairo::RefPtr<Cairo::Context> ptrContext);
     bool isEditable();
