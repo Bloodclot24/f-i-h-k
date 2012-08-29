@@ -82,6 +82,8 @@ public:
 	 */
 	void on_menu_save();
 
+	void on_menu_save_as();
+
 	void on_name_change();
 
 	virtual bool on_key_release_event(GdkEventKey* event);

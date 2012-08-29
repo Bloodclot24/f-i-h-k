@@ -268,22 +268,6 @@ Diagram* Workspace::getDiagram(){
 	return m_diagram;
 }
 
-void Workspace::printErrorMessage(const Cairo::RefPtr<Cairo::Context>& ptrContext, const std::string& errorMessage, double wrap) {
-    ptrContext->set_source_rgb(0, 0, 0);
-    ptrContext->set_line_width(0.4);
-    Glib::RefPtr<Pango::Layout> pangoLayout = Pango::Layout::create (ptrContext);
-
-    Pango::FontDescription font_desc("sans 8");
-    pangoLayout->set_font_description(font_desc);
-    pangoLayout->set_width(Pango::SCALE * wrap);
-    pangoLayout->set_wrap(Pango::WRAP_WORD_CHAR);
-
-    pangoLayout->set_text("Ocurrio un error : " + errorMessage);
-    pangoLayout->update_from_cairo_context(ptrContext);
-    pangoLayout->add_to_cairo_context(ptrContext);
-    ptrContext->fill();
-}
-
 void Workspace::validateDiagram(std::string archivo){
 
 	  fstream filestr;
