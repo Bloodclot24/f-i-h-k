@@ -32,7 +32,6 @@ Subdiagram& Subdiagram::operator=(const Subdiagram& otro) {
 
 void Subdiagram::serialize(XmlWriter & writer_rep, XmlWriter & writer_comp)
 {
-	Utils utils;
 	writer_rep.addRootChild(TARGET_SUBDIAGRAM, "");
 	Component::serialize(writer_rep, writer_comp);
 /*	writer_rep.addCurrentNodeProperty(TARGET_SIZE_X, utils.convertToString(m_sizeX).c_str());
@@ -45,7 +44,6 @@ void Subdiagram::serialize(XmlWriter & writer_rep, XmlWriter & writer_comp)
 
 void Subdiagram::deserialize(XmlReader & reader)
 {
-	Utils utils;
 	Component::deserialize(reader);
 /*	m_AttributeNumber = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_CANT_ENTRADAS));
 	m_sizeX = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_X));

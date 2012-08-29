@@ -181,7 +181,7 @@ void Workspace::on_load(XmlReader& reader, Tabs* tabs) {
 					nodoActual = reader.nextNode();
 				}
 				idsComponentesEntradas[identificador] =  ids;
-				for(int i = 0 ; i < views.size() ; i++) {
+				for(unsigned i = 0 ; i < views.size() ; i++) {
 					Workspace* workspace = tabs->getWorkspace(views[i].name);
 					visualComponent->addView(workspace->getVisualCompositeComponent(views[i].id));
 				}
@@ -236,7 +236,6 @@ void Workspace::store(XmlWriter& writer_rep, XmlWriter& writer_comp){
 
 	writer_comp.addCurrentNodeProperty(TARGET_NAME, m_diagram->getName().c_str());
 
-	int size = m_diagram->getComponents()->size();
 	m_diagram->startSerialization();
 	for (std::vector<VisualCompositeComponent*>::iterator it = m_visualComponentList.begin(); it != m_visualComponentList.end(); ++it)
 		(*it)->store(writer_rep, writer_comp, m_diagram);

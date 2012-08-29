@@ -40,7 +40,7 @@ void VisualComponentSubdiagram::showProperties(){
 }
 
 void VisualComponentSubdiagram::crear() {
-	Subdiagram* subdiagram = (Subdiagram*) m_component;;
+//	Subdiagram* subdiagram = (Subdiagram*) m_component;;
 	XmlReader xmlReader(m_xml.c_str(), m_xml.size());
 //	subdiagram->deserializeToDraw(xmlReader);
 	initialize();
