@@ -19,7 +19,7 @@ private:
 	bool m_active;
 	std::string m_proyectName;
 
-	void save_as();
+	void save_all();
 
 public:
 	Tabs(BarraDeMenu& barraDeMenu);

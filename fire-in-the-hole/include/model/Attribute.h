@@ -16,8 +16,6 @@ public:
 
 	virtual void deserialize(XmlReader & reader);
 
-	virtual void removeFromDiagram(Diagram* diagram);
-
 };
 
 #endif /* ATTRIBUTE_H_ */

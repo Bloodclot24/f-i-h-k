@@ -19,11 +19,11 @@ Tabs::Tabs(BarraDeMenu& barraDeMenu) : barraDeMenu(barraDeMenu) {
 	m_refActionGroup->add( Gtk::Action::create("NewProyect", Gtk::Stock::NEW, "New Proyect"), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
 	m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW, "New Diagram"), sigc::mem_fun(this, &Tabs::on_menu_new));
 	m_refActionGroup->add( Gtk::Action::create("OpenProyect", Gtk::Stock::OPEN, "Open Proyect"), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
-	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN, "Open Diagram"), sigc::mem_fun(this, &Tabs::on_menu_open));
+//	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN, "Open Diagram"), sigc::mem_fun(this, &Tabs::on_menu_open));
 	m_refActionGroup->add( Gtk::Action::create("Save", Gtk::Stock::SAVE, "Save Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save));
-	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS, "SaveAs Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save_as));
+//	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS, "SaveAs Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save_as));
 	m_refActionGroup->add( Gtk::Action::create("CloseProyect", Gtk::Stock::CLOSE, "Close Proyect"), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
-	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE, "Close Diagram"), sigc::mem_fun(this, &Tabs::on_menu_close));
+//	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE, "Close Diagram"), sigc::mem_fun(this, &Tabs::on_menu_close));
 	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", Gtk::Stock::EDIT, "Rename Diagram"), sigc::mem_fun(this, &Tabs::on_name_change));
 
 	barraDeMenu.addActionGroup(m_refActionGroup);
@@ -121,6 +121,8 @@ void Tabs::on_menu_open_proyect() {
 }
 
 void Tabs::on_menu_close_proyect() {
+
+	save_all();
 	while ( get_n_pages () >= 1)
 		removerSubVentanaActual();
 }
@@ -132,6 +134,11 @@ void Tabs::on_menu_open() {
 	fileChooser.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
 	int resultado = fileChooser.run();
 	if (resultado == Gtk::RESPONSE_OK) {
+		while(fileChooser.get_filename().find("-rep") != fileChooser.get_filename().length() - 4 ) {
+			Gtk::MessageDialog error("Tipo de archivo incorrecto. Seleccione un archivo -rep.");
+			error.run();
+			return;
+		}
 		XmlReader reader(fileChooser.get_filename().c_str());
 		Diagram* circ = new Diagram();
 		agregarSubVentana(circ);
@@ -140,19 +147,16 @@ void Tabs::on_menu_open() {
 	}
 }
 
-void Tabs::save_as() {
-	Gtk::FileChooserDialog fileChooser("Elegir name", Gtk::FILE_CHOOSER_ACTION_SAVE);
-	fileChooser.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-	fileChooser.add_button(Gtk::Stock::SAVE, Gtk::RESPONSE_OK);
-	int resultado = fileChooser.run();
-	if (resultado == Gtk::RESPONSE_OK) {
-		Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
+void Tabs::save_all() {
+	if ( get_n_pages () < 1)
+		return;
+	for(int i = 0; i < subVentanas.size(); i++) {
+		Diagram* diagram = subVentanas[i]->getDiagram();
 		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
-		std::string path = fileChooser.get_filename();
-		diagram->setPath(path);
+		std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); //fileChooser.get_filename();
 		XmlWriter writer_rep("diagram");
 		XmlWriter writer_comp("diagram");
-		subVentanas[get_current_page()]->getWorkspace()->store(writer_rep, writer_comp);
+		subVentanas[i]->getWorkspace()->store(writer_rep, writer_comp);
 		writer_rep.saveFile((path + "-rep").c_str());
 		writer_comp.saveFile((path + "-comp").c_str());
 	}
@@ -161,25 +165,14 @@ void Tabs::save_as() {
 void Tabs::on_menu_save() {
 	if ( get_n_pages () < 1)
 		return;
-
-	int page = get_current_page();
 	Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
-	std::string path = diagram->getPath();
-	if (path.length() == 0)
-		save_as();
-	else {
-		XmlWriter writer_rep("diagram");
-		XmlWriter writer_comp("diagram");
-		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<std::endl;
-		subVentanas[get_current_page()]->getWorkspace()->store(writer_rep, writer_comp);
-		writer_rep.saveFile((path + "-rep").c_str());
-		writer_comp.saveFile((path + "-comp").c_str());
-	}
-}
-
-void Tabs::on_menu_save_as() {
-	if (get_n_pages () > 0)
-		save_as();
+	std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
+	std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); //fileChooser.get_filename();
+	XmlWriter writer_rep("diagram");
+	XmlWriter writer_comp("diagram");
+	subVentanas[get_current_page()]->getWorkspace()->store(writer_rep, writer_comp);
+	writer_rep.saveFile((path + "-rep").c_str());
+	writer_comp.saveFile((path + "-comp").c_str());
 }
 
 bool Tabs::on_key_release_event(GdkEventKey* event) {
