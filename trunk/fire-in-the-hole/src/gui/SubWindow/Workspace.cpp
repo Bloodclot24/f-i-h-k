@@ -3,7 +3,6 @@
 #include "gui/VisualComponents/VisualComponentCompositeAttribute.h"
 #include "gui/VisualComponents/VisualComponentRelation.h"
 #include "gui/VisualComponents/VisualComponentAttribute.h"
-#include "gui/VisualComponents/VisualComponentSubdiagram.h"
 #include "gui/VisualComponents/VisualComponentVia.h"
 #include "gui/VisualComponents/VisualComponentForkVia.h"
 #include "model/Utils.h"
