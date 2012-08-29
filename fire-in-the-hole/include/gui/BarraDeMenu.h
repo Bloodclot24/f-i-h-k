@@ -58,6 +58,7 @@ public:
     void on_menu_exportar_PDF();
     void on_menu_about();
     void on_menu_help();
+    void on_publish_diagram();
 
     void deleteSelection();
     void copy();
