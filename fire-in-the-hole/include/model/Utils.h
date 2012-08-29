@@ -21,7 +21,7 @@
 #define TARGET_RELATION "relacion"
 #define TARGET_COMPOSITEATTRIBUTE "at_compuesto"
 #define TARGET_SUBDIAGRAM "diagrama"
-#define TARGET_VIA "rol"
+#define TARGET_VIA "via"
 #define TARGET_FORK "jerarquia"
 #define TARGET_PUNTO "Punto"
 #define TARGET_EXPRESSION "expression"

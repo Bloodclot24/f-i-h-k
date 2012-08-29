@@ -15,7 +15,7 @@ private:
 
 public:
 
-	Via(unsigned exit = 0, const std::string & name = TARGET_VIA, int orientation = 0);
+	Via(unsigned exit = 0, const std::string & name = "rol", int orientation = 0);
 
 	Via(const Via &);
 	Via& operator=(const Via&);

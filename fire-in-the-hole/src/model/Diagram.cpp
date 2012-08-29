@@ -70,13 +70,6 @@ void Diagram::finalizeSerialization(){
 
 int Diagram::getId(Component* component)
 {
-/*	for(unsigned i = 0; i < m_components.size(); i++)
-		if(m_components[i]->isIqual(*component)) {
-			std::cout<<"/indice  " << i << "/";
-			return i;
-		}
-	return -1;
-	*/
 	int size1 = m_components.size();
 	int size = m_serializationIndex->size();
 	if ( m_serializationIndex->count(component)==0)
