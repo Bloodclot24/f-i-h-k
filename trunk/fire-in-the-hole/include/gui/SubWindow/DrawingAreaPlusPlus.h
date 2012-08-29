@@ -54,10 +54,6 @@ public:
 	 */
 	void setConnectingLine(VisualComponentSegment* line);
 
-	/**
-	 *
-	 * @return
-	 */
 	VisualComponentSegment* getConnectingLine();
 
 	Glib::RefPtr<Gtk::UIManager>& getUIManager();

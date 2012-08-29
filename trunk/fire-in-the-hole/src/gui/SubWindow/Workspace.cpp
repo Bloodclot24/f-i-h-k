@@ -150,8 +150,6 @@ void Workspace::on_load(XmlReader& reader, Tabs* tabs) {
 				visualComponent = new VisualComponentRelation( m_diagram);
 			else if (!strcmp(nameComponente, TARGET_COMPOSITEATTRIBUTE))
 				visualComponent = new VisualComponentCompositeAttribute( m_diagram);
-			else if (!strcmp(nameComponente, TARGET_SUBDIAGRAM))
-				visualComponent = new VisualComponentSubdiagram( m_diagram);
 			else if (!strcmp(nameComponente, TARGET_VIA))
 				visualComponent = new VisualComponentVia( m_diagram);
 			else if (!strcmp(nameComponente, TARGET_FORK))

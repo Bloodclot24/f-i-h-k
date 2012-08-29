@@ -18,8 +18,6 @@ class Diagram {
 
 private:
 	std::vector<Component*> m_components;
-	std::vector<Subdiagram*> m_subdiagrams;
-	std::vector<Attribute*> m_attributes;
 
 	//Mapa utilizado en la serializacion para asociar los
 	//identificadores con sus componentes
@@ -46,19 +44,13 @@ public:
 
 	void startSerialization();
 	void finalizeSerialization();
-    void addAttribute(Attribute*);
     void addComponent(Component *component);
-    void addChip(Subdiagram *subdiagram);
     void removeComponent(Component*);
-    void removeChip(Subdiagram*);
-    void removeAttribute(Attribute*);
 
     void deserialize(XmlReader & reader);
     void deserialize(const std::string & str);
 
     void validateDiagram(std::fstream & filestr);
-    void serializeToDraw(XmlWriter & writer);
-    std::string serializeToDraw();
 
 	void serializeConnectedComponents(Component* component, XmlWriter & writer);
 	int getId(Component* component);
@@ -66,16 +58,6 @@ public:
 	std::vector<Component*>* getComponents()
     {
         return &m_components;
-    }
-
-    std::vector<Subdiagram*>* getSubdiagrams()
-    {
-        return &m_subdiagrams;
-    }
-
-    std::vector<Attribute*>* getAttributes()
-    {
-        return &m_attributes;
     }
 
     unsigned getSizeX() const

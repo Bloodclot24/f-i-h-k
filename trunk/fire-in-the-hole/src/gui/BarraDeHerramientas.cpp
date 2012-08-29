@@ -1,6 +1,5 @@
 #include "gui/BarraDeHerramientas.h"
 #include "gui/VisualComponents/VisualComponentEntity.h"
-#include "gui/VisualComponents/VisualComponentSubdiagram.h"
 #include "gui/VisualComponents/VisualComponentAttribute.h"
 #include "gui/VisualComponents/VisualComponentCompositeAttribute.h"
 #include "gui/VisualComponents/VisualComponentRelation.h"
@@ -41,7 +40,6 @@ BarraDeHerramientas::~BarraDeHerramientas() {
 
 void BarraDeHerramientas::setTabs( Tabs* tabs){
 	m_tabs = tabs;
-	m_diagramButton.setTabs(tabs);
 }
 
 template< typename T >
