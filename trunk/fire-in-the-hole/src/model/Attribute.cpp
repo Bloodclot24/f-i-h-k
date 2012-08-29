@@ -59,7 +59,3 @@ void Attribute::deserialize(XmlReader & reader) {
 	m_options[1] = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_ID_1));
 	m_options[2] = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_ID_2));
 }
-
-void Attribute::removeFromDiagram(Diagram* diagram){
-	diagram->removeAttribute(this);
-}
