@@ -75,39 +75,23 @@ void VisualCompositeComponent::load(XmlReader& reader, Diagram* diagram){
 }
 
 void VisualCompositeComponent::store(XmlWriter& writer_rep, XmlWriter& writer_comp, Diagram* diagram) {
-	xmlNode* nodoActual;
-	//m_component->update();
-	nodoActual = writer_comp.getCurrentNode();
+	xmlNode* nodoActual = writer_comp.getCurrentNode();
 	m_component->serialize(writer_rep, writer_comp);
 	Utils utils;
 	writer_rep.addCurrentNodeProperty(TARGET_ID, utils.convertToString(diagram->getId(m_component)).c_str());
-
-	std::string tipo = typeid(*m_component).name();
-	//std::cout << "Componente: " << tipo << std::endl;
-
-	if (m_component->getName() != "Via"){
-		if (tipo.substr(1,9) != "Attribute"){
-			writer_comp.addCurrentNodeProperty(TARGET_ID, utils.convertToString(diagram->getId(m_component)).c_str());
-			if (tipo.substr(1,6) == "Entity")
-				serializedAttributes(writer_comp, diagram, m_component);
-		}
-		writer_comp.setCurrentNode(nodoActual);
-	}
 	diagram->serializeConnectedComponents(m_component, writer_rep);
-/*	xmlNode* nodoActual;
-	for(unsigned i = 0; i < connectors.size(); i++){
-		nodoActual = connectors[i]->getVia() != NULL ?
-			writer.addCurrentNodeChild(connectors[i]->getVia()->getName().c_str(), "") :
-			writer.addCurrentNodeChild(TARGET_VACIO, "");
-		Utils utils;
-		writer.addProperty(nodoActual, TARGET_ID, utils.convertToString(getId(connectors[i]->getVia())).c_str());
-*/	xmlNode* nodoActual2;
+
 	for (std::vector<VisualCompositeComponent*>::iterator it = m_views.begin(); it != m_views.end(); ++it) {
 		Component* viewComp = (*it)->getComponent();
 		Diagram* otherDiagram = (*it)->getDiagram();
-		nodoActual2 = writer_rep.addCurrentNodeChild(TARGET_OTHER_DIAGRAM, "");
-		writer_rep.addProperty(nodoActual2, TARGET_NAME, otherDiagram->getName().c_str());
-		writer_rep.addProperty(nodoActual2, TARGET_ID, utils.convertToString(otherDiagram->getId(viewComp)).c_str());
+		nodoActual = writer_rep.addCurrentNodeChild(TARGET_OTHER_DIAGRAM, "");
+		writer_rep.addProperty(nodoActual, TARGET_NAME, otherDiagram->getName().c_str());
+		int index = -1;
+		for( int i = 0; i < otherDiagram->getComponents()->size(); i++)
+			if((*(otherDiagram->getComponents()))[i] == viewComp)
+				index = i;
+		//writer_rep.addProperty(nodoActual, TARGET_ID, utils.convertToString(otherDiagram->getId(viewComp)).c_str());
+		writer_rep.addProperty(nodoActual, TARGET_ID, utils.convertToString(index).c_str());
 	}
 }
 
