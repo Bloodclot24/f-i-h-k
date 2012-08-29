@@ -66,14 +66,6 @@ public:
 		m_drawArea = drawArea;
 	}
 
-	std::vector< VisualCompositeComponent* >* getSelection() {
-		return m_selection;
-	}
-
-	void setSelection(std::vector< VisualCompositeComponent* >* selection) {
-		m_selection = selection;
-	}
-
 	std::vector< VisualCompositeComponent* >* duplicateSelection(bool add = true);
 
 private:

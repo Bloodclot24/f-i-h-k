@@ -31,14 +31,6 @@ private:
 
 	Glib::RefPtr<Gtk::PageSetup> m_refPageSetup;
 	Glib::RefPtr<Gtk::PrintSettings> m_refSettings;
-    /**
-     * Imprime el mensaje de error dado en el cairo context.
-     *
-     * @param ptrContext
-     * @param errorMessage
-     * @param wrap el maximo tamaño de linea.
-     */
-    void printErrorMessage(const Cairo::RefPtr<Cairo::Context>& ptrContext, const std::string& errorMessage, double wrap);
 
 public:
 	Workspace(Diagram* diagram, bool enableEvents = true);
