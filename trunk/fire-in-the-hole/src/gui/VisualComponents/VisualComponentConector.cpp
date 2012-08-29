@@ -33,10 +33,6 @@ void VisualComponentConector::draw(Cairo::RefPtr<Cairo::Context> ptrContext){
 
 }
 
-int VisualComponentConector::getNumber(){
-	return m_number;
-}
-
 void VisualComponentConector::on_move(int x, int y){
 	//mover la via cuando sea necesario
 	if ( m_via != NULL )
