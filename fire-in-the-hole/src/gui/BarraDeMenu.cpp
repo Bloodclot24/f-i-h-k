@@ -238,16 +238,17 @@ void BarraDeMenu::exportSubdiagram(){
 		return ;
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
+	if ( han != NULL) {
+		SubVentana* subVentanaAnterior = subVentana;
+		m_tabs->on_menu_open();
 
-	SubVentana* subVentanaAnterior = subVentana;
-	m_tabs->on_menu_open();
-
-	han->setDarea(subVentana->getWorkspace());
-	han->copy(true);
-	han->setDarea(subVentanaAnterior->getWorkspace());
-	han->createSubdiagram();
-	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
-	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
+		han->setDarea(subVentana->getWorkspace());
+		han->copy(true);
+		han->setDarea(subVentanaAnterior->getWorkspace());
+		han->createSubdiagram();
+		subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
+		subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
+	}
 }
 
 
@@ -256,15 +257,17 @@ void BarraDeMenu::createSubdiagram(){
 		return ;
 
 	HandlerSelected* han = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
-	SubVentana* subVentanaAnterior = subVentana;
+	if ( han != NULL) {
+		SubVentana* subVentanaAnterior = subVentana;
 
-	m_tabs->agregarSubVentana();
-	han->setDarea(subVentana->getWorkspace());
-	han->copy(true);
-	han->setDarea(subVentanaAnterior->getWorkspace());
-	han->createSubdiagram();
-	subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
-	subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
+		m_tabs->agregarSubVentana();
+		han->setDarea(subVentana->getWorkspace());
+		han->copy(true);
+		han->setDarea(subVentanaAnterior->getWorkspace());
+		han->createSubdiagram();
+		subVentana->getWorkspace()->setHandler(new HandlerDefault(subVentana->getWorkspace()));
+		subVentanaAnterior->getWorkspace()->setHandler(new HandlerDefault(subVentanaAnterior->getWorkspace()));
+	}
 }
 
 void BarraDeMenu::setActive(bool act){
