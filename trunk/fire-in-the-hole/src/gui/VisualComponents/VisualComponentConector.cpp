@@ -30,25 +30,7 @@ InfluenceArea VisualComponentConector::getInfluenceArea() {
 }
 
 void VisualComponentConector::draw(Cairo::RefPtr<Cairo::Context> ptrContext){
-	/*ptrContext->save();
 
-	int x = getX();
-	int y = getY();
-
-	ptrContext->set_source_rgb(COLOR_LINE_COMPONENTS);
-	ptrContext->set_line_width(ANCHO_DE_LINEA_CONECTOR);
-	ptrContext->arc(x + CONECTOR_RADIUS, y + CONECTOR_RADIUS, CONECTOR_RADIUS, 0, 2 * M_PI);
-	ptrContext->stroke_preserve();
-	if ( m_selected){
-		if( m_isAttribute)
-			ptrContext->set_source_rgb(0, 0, 1);
-		else
-			ptrContext->set_source_rgb(1, 0, 0);
-	}else
-		ptrContext->set_source_rgb(1, 1, 1);
-	ptrContext->fill();
-	ptrContext->restore();
-	*/
 }
 
 int VisualComponentConector::getNumber(){

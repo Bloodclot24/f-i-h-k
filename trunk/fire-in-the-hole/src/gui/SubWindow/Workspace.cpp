@@ -8,7 +8,6 @@
 #include "gui/VisualComponents/VisualComponentForkVia.h"
 #include "model/Utils.h"
 #include "xml/XmlReader.h"
-//#include "gtkmm/messagedialog.h"
 #include "gui/Tabs.h"
 #include <iostream>
 using namespace std;

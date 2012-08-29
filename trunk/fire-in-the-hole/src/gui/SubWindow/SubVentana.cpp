@@ -15,7 +15,7 @@ SubVentana::SubVentana(Diagram* diagram, Gtk::Allocation allocation) :
 	//Workspace a la izquierda.
 	boxInicial.pack_start(scrollWorkspace, true, true, 0);
 	scrollWorkspace.add(adaptador);
-	adaptador.add(*workspace);//TODO constructor copia
+	adaptador.add(*workspace);
 	workspace->size_allocate(allocation);
 
 	//Parte de la derecha.
