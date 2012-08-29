@@ -32,8 +32,6 @@ BarraDeHerramientas::BarraDeHerramientas() : Gtk::VButtonBox(Gtk::BUTTONBOX_STAR
 	m_buttons[3].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentCompositeAttribute>));
 	m_buttons[4].signal_pressed().connect(sigc::mem_fun(this, &BarraDeHerramientas::createVisualComponent<VisualComponentForkVia>));
 
-	//Se agregan los botones "especiales".
-	//pack_start(m_diagramButton, false, false, 0);
 }
 
 BarraDeHerramientas::~BarraDeHerramientas() {

@@ -176,7 +176,7 @@ void VisualComponentVia::createSegments(){
 	if(m_startConector->isEditable() && m_endConector->isEditable()) {
 	VisualComponentSegment* segment = new VisualComponentSegment(point0, point1, false );
 	addChild(segment);
-	segment = new VisualComponentSegment( point1, point2, true); // m_component->getCardinality());
+	segment = new VisualComponentSegment( point1, point2, true); 
 	addChild(segment);
 	segment = new VisualComponentSegment( point2, point3, false);
 	addChild(segment);

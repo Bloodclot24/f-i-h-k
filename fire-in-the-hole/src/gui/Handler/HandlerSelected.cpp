@@ -30,7 +30,7 @@ HandlerSelected::~HandlerSelected() {
 }
 
 void HandlerSelected::on_motion_notify_event(GdkEventMotion* event, VisualCompositeComponent* touchedComponent){
-	//esto es por si no se clickeo en alguna opcion del popup
+	//Si no se clickeo ninguna opcion del popup
 	if ( m_popupCalledBefore){
 		m_drawArea->setHandler( new HandlerDefault(m_drawArea));
 		return ;
@@ -136,10 +136,10 @@ void HandlerSelected::eraseSelection(Tabs* tabs){
 	//quedar desconectadas en un extremo, recorriendo los conectores de la seleccion
 	for ( unsigned i=0 ; i < resto.size() ; i++ ) {
 		for ( unsigned j=0 ; j < resto[i]->getChildren().size() ; j++ ) {
-			VisualComponentConector* conector = (VisualComponentConector*) resto[i]->getChildren()[j]; //son everythings conectores
+			VisualComponentConector* conector = (VisualComponentConector*) resto[i]->getChildren()[j]; 
+
 			if(conector->getVia() != NULL) {
 				m_drawArea->removeVisualComponent(conector->getVia());
-				//removeFromOtherDiagrams(conector->getVia(),tabs, true);
 				delete conector->getVia(); //setea los conectores de los extremos a NULL
 			}
 		}

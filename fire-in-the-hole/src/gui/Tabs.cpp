@@ -19,11 +19,8 @@ Tabs::Tabs(BarraDeMenu& barraDeMenu) : barraDeMenu(barraDeMenu) {
 	m_refActionGroup->add( Gtk::Action::create("NewProyect", Gtk::Stock::NEW, "New Proyect"), sigc::mem_fun(this, &Tabs::on_menu_new_proyect));
 	m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW, "New Diagram"), sigc::mem_fun(this, &Tabs::on_menu_new));
 	m_refActionGroup->add( Gtk::Action::create("OpenProyect", Gtk::Stock::OPEN, "Open Proyect"), sigc::mem_fun(this, &Tabs::on_menu_open_proyect));
-//	m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN, "Open Diagram"), sigc::mem_fun(this, &Tabs::on_menu_open));
 	m_refActionGroup->add( Gtk::Action::create("Save", Gtk::Stock::SAVE, "Save Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save));
-//	m_refActionGroup->add( Gtk::Action::create("SaveAs", Gtk::Stock::SAVE_AS, "SaveAs Diagram"), sigc::mem_fun(this, &Tabs::on_menu_save_as));
 	m_refActionGroup->add( Gtk::Action::create("CloseProyect", Gtk::Stock::CLOSE, "Close Proyect"), sigc::mem_fun(this, &Tabs::on_menu_close_proyect));
-//	m_refActionGroup->add( Gtk::Action::create("Close", Gtk::Stock::CLOSE, "Close Diagram"), sigc::mem_fun(this, &Tabs::on_menu_close));
 	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", Gtk::Stock::EDIT, "Rename Diagram"), sigc::mem_fun(this, &Tabs::on_name_change));
 
 	barraDeMenu.addActionGroup(m_refActionGroup);
@@ -158,7 +155,7 @@ void Tabs::save_all() {
 	for(unsigned i = 0; i < subVentanas.size(); i++) {
 		Diagram* diagram = subVentanas[i]->getDiagram();
 		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
-		std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); //fileChooser.get_filename();
+		std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); 
 		XmlWriter writer_rep("diagram");
 		XmlWriter writer_comp("diagram");
 		subVentanas[i]->getWorkspace()->store(writer_rep, writer_comp);
@@ -172,7 +169,7 @@ void Tabs::on_menu_save() {
 		return;
 	Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
 	std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
-	std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); //fileChooser.get_filename();
+	std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName();
 	XmlWriter writer_rep("diagram");
 	XmlWriter writer_comp("diagram");
 	subVentanas[get_current_page()]->getWorkspace()->store(writer_rep, writer_comp);
@@ -213,7 +210,7 @@ void Tabs::on_name_change() {
 
 Workspace* Tabs::getWorkspace(Diagram* diagram) {
 	for( unsigned i = 0; i < subVentanas.size(); i++) {
-		if(subVentanas[i]->getDiagram()->getName() == diagram->getName() ) //TODO
+		if(subVentanas[i]->getDiagram()->getName() == diagram->getName() ) 
 			return subVentanas[i]->getWorkspace();
 	}
 	return NULL;

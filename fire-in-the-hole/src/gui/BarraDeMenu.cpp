@@ -211,14 +211,6 @@ void BarraDeMenu::cut(){
 		han->cut();
 }
 
-/*
-void BarraDeMenu::createSubdiagram(){
-	if ( !m_active)
-		return ;
-	handler = dynamic_cast< HandlerSelected* >(subVentana->getWorkspace()->getHandler());
-	m_tabs->setActive(true);
-}
-*/
 
 void BarraDeMenu::switchTabs(SubVentana* subVentanaAnterior) {
 	if ( !m_active)

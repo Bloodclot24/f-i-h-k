@@ -34,22 +34,14 @@ void Subdiagram::serialize(XmlWriter & writer_rep, XmlWriter & writer_comp)
 {
 	writer_rep.addRootChild(TARGET_SUBDIAGRAM, "");
 	Component::serialize(writer_rep, writer_comp);
-/*	writer_rep.addCurrentNodeProperty(TARGET_SIZE_X, utils.convertToString(m_sizeX).c_str());
-	writer_rep.addCurrentNodeProperty(TARGET_SIZE_Y, utils.convertToString(m_sizeY).c_str());
 
-	writer_rep.addCurrentNodeProperty(TARGET_CANT_ENTRADAS, utils.convertToString(m_AttributeNumber).c_str());
-*/
 }
 
 
 void Subdiagram::deserialize(XmlReader & reader)
 {
 	Component::deserialize(reader);
-/*	m_AttributeNumber = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_CANT_ENTRADAS));
-	m_sizeX = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_X));
-	m_sizeY = utils.convertToUnsigned(reader.getCurrentNodeProperty(TARGET_SIZE_Y));
-	initializeConnectors();
-	*/
+
 }
 
 void Subdiagram::addToDiagram(Diagram* diagram){

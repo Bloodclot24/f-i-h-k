@@ -58,16 +58,9 @@ void Component::serialize(XmlWriter & writer_rep, XmlWriter & writer_comp)
 	writer_rep.addCurrentNodeProperty(TARGET_POS_X, utils.convertToString(m_posX).c_str());
 	writer_rep.addCurrentNodeProperty(TARGET_POS_Y, utils.convertToString(m_posY).c_str());
 
-	//std::string tipo = typeid(this).name();
-	//std::cout << "Componente: " << tipo << std::endl;
-
 	if (m_name != "Via"){
 		nodoActual = writer_comp.addCurrentNodeChild(m_name.c_str(), "");
 		writer_comp.addProperty(nodoActual, TARGET_NAME, m_name.c_str());
-		//if (!m_attributes.empty()){
-			//writer_comp.setCurrentNode(nodoActual);
-			//serializeAttributes(writer_comp);
-		//}
 		writer_comp.setCurrentNode(nodoActual);
 	}
 
@@ -135,7 +128,7 @@ void Component::validate(std::fstream & filestr, bool &valido){
 			// verifico que tenga al menos un atributo
 			if  ( strcmp(str.c_str(),"Attribute") == 0 )
 				cantAtr++;
-				// TODO: Abria que verificar si no es clave que herede la clave de alguien
+				
 	  }
 	     if ( cantAtr == 0){
 	    	 filestr << "<H2>	Error: La entidad no posee ningun atributo" << "</H2>";
@@ -192,8 +185,6 @@ void Component::validate(std::fstream & filestr, bool &valido){
 			str.erase(std::remove_if(str.begin(), str.end(), &isdigit),
 					str.end());
 
-			//                                              (*it)->getExitConnectors()->at(0)->getFather();
-			// UnFork deberia solo estar unido a entidades
 			if (strcmp(str.c_str(), "Entity") == 0)
 				cantForkEnt++;
 			else

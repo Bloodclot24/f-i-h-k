@@ -16,8 +16,7 @@ HandlerCreateSelection::~HandlerCreateSelection() {
 
 
 void HandlerCreateSelection::on_motion_notify_event(GdkEventMotion* event, VisualCompositeComponent* touchedComponent){
-// podemos ir seleccionando los que estan dentro del cuadrado.
-	//dibujamos el cuadrito de seleccion.
+	//dibujamos el cuadro de seleccion.
 	InfluenceRectangle* rect= new InfluenceRectangle(m_mouseX, m_mouseY, event->x, event->y);
 	m_drawArea->setSelectionRectangle(rect);
 	m_drawArea->reDraw();
