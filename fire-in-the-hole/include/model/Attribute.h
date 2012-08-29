@@ -15,7 +15,6 @@ public:
 	virtual void serialize(XmlWriter & writer_rep, XmlWriter & writer_comp);
 
 	virtual void deserialize(XmlReader & reader);
-
 };
 
 #endif /* ATTRIBUTE_H_ */
