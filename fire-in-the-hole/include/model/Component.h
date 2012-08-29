@@ -155,13 +155,6 @@ public:
     std::vector<Attribute*>* getAtrributes(){
 		return &m_attributes;
     }
-
-    bool isIqual(Component& other) {
-    	std::cout<<"/other  " << other.m_name << "/"<< other.m_type << "/"<< other.m_posX << "/"<< other.m_posY << "/";
-    	std::cout<<"/this  " << m_name << "/"<< m_type << "/"<< m_posX << "/"<< m_posY << "/";
-    	return other.m_name == m_name && other.m_type == m_type &&
-    			other.m_posX == m_posX && other.m_posY == m_posY;
-    }
 };
 
 #endif /* COMPONENTE_H_ */

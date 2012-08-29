@@ -20,12 +20,8 @@ Diagram::Diagram(const std::string & name) {
 }
 
 Diagram::~Diagram(){
-	for(unsigned i = 0; i < m_attributes.size(); i++)
-		delete m_attributes[i];
 	for(unsigned i = 0; i < m_components.size(); i++)
 		delete m_components[i];
-	for(unsigned i = 0; i < m_subdiagrams.size(); i++)
-		delete m_subdiagrams[i];
 }
 
 void Diagram::serializeConnectedComponents(Component* component, XmlWriter & writer)
@@ -49,17 +45,8 @@ void Diagram::serializeConnectedComponents(std::vector<Connector*> connectors, X
 void Diagram::startSerialization(){
 	m_serializationIndex = new std::map< Component* , int>();
 	int id = 0;
-	for(unsigned i = 0; i < m_attributes.size(); i++){
-		(*m_serializationIndex)[m_attributes[i]] = id ;
-		id++;
-	}
-
 	for(unsigned i = 0; i < m_components.size(); i++){
 		(*m_serializationIndex)[m_components[i]] = id ;
-		id++;
-	}
-	for(unsigned i = 0; i < m_subdiagrams.size(); i++){
-		(*m_serializationIndex)[m_subdiagrams[i]] = id ;
 		id++;
 	}
 }
@@ -82,18 +69,6 @@ void Diagram::addComponent(Component* component)
 	
 }
 
-void Diagram::addAttribute(Attribute* Attribute) {
-	Utils utils;
-	Attribute->setName(Attribute->getName() + utils.convertToString(m_lastAttributeId));
-	m_attributes.push_back(Attribute);
-	m_lastAttributeId++;
-}
-
-void Diagram::addChip(Subdiagram* SUBDIAGRAM){
-	m_subdiagrams.push_back(SUBDIAGRAM);
-}
-
-
 void Diagram::removeComponent(Component* component) {
 	for(std::vector<Component*>::iterator it = m_components.begin(); it != m_components.end(); ++it)
 		if((*it) == component) {
@@ -101,32 +76,6 @@ void Diagram::removeComponent(Component* component) {
 		   return;
 		}
 }
-
-void Diagram::removeChip(Subdiagram* subdiagram) {
-	for(std::vector<Subdiagram*>::iterator it = m_subdiagrams.begin(); it != m_subdiagrams.end(); ++it)
-		if((*it) == subdiagram) {
-		   m_subdiagrams.erase(it);
-		   return;
-		}
-}
-
-void Diagram::removeAttribute(Attribute* attribute) {
-	for(std::vector<Attribute*>::iterator it = m_attributes.begin(); it != m_attributes.end(); ++it)
-		if((*it) == attribute) {
-			m_attributes.erase(it);
-			break;
-		}
-}
-
-void Diagram::serializeToDraw(XmlWriter & writer)
-{
-	Utils utils;
-	writer.addCurrentNodeProperty(TARGET_NAME, m_name.c_str());
-	writer.addCurrentNodeProperty(TARGET_CANT_ENTRADAS, utils.convertToString(m_attributes.size()).c_str());
-	writer.addCurrentNodeProperty(TARGET_SIZE_X, utils.convertToString(m_sizeX).c_str());
-	writer.addCurrentNodeProperty(TARGET_SIZE_Y, utils.convertToString(m_sizeY).c_str());
-}
-
 
 void Diagram::deserialize(XmlReader & reader)
 {
@@ -154,8 +103,6 @@ void Diagram::deserialize(XmlReader & reader)
 				component = new Relation();
 			else if (!strcmp(nameComponente, TARGET_COMPOSITEATTRIBUTE))
 				component = new CompositeAttribute();
-			else if (!strcmp(nameComponente, TARGET_SUBDIAGRAM))
-				component = new Subdiagram();
 			else if (!strcmp(nameComponente, TARGET_VIA))
 				component = new Via();
 			else if (!strcmp(nameComponente, TARGET_FORK))
@@ -212,12 +159,6 @@ void Diagram::deserialize(XmlReader & reader)
 	}
 }
 
-std::string Diagram::serializeToDraw(){
-	XmlWriter xml("diagram");
-	serializeToDraw(xml);
-	return xml.toString();
-}
-
 void Diagram::deserialize(const std::string &str){
 	XmlReader xml(str.c_str(), str.size());
 	deserialize(xml);
@@ -243,8 +184,6 @@ void Diagram::validateDiagram(std::fstream & filestr){
 	filestr<< "<HTML><HEAD><TITLE>ARCHIVO DE VALIDACION</TITLE></HEAD><BODY> ";
 
 	for(std::vector<Component*>::iterator it = m_components.begin(); it != m_components.end(); ++it)
-		(*it)->validate(filestr,valido);
-	for(std::vector<Attribute*>::iterator it = m_attributes.begin(); it != m_attributes.end(); ++it)
 		(*it)->validate(filestr,valido);
 
 	filestr << "<H1>**************************************************************************************************" << "</H1>";

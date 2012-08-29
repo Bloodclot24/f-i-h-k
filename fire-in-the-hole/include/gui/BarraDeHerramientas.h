@@ -7,7 +7,6 @@
 #include <iostream>
 #include <gtkmm/builder.h>
 #include "gui/Dibujar/AuxiliarDibujar.h"
-#include "gui/SubWindow/SubdiagramButton.h"
 #include "gtkmm-2.4/gtkmm/button.h"
 #include "gtkmm-2.4/gtkmm/buttonbox.h"
 #include "gui/SubWindow/DrawingAreaPlusPlus.h"
@@ -25,8 +24,6 @@ class BarraDeHerramientas : public Gtk::VButtonBox {
 private:
 	Gtk::Button m_buttons[CANTIDAD_BOTONES];
 	Gtk::Image* m_images[CANTIDAD_BOTONES];
-
-	SubdiagramButton m_diagramButton;
 
 	Tabs* m_tabs;
 

@@ -81,7 +81,6 @@ public:
 	 * Metodos que guardan el diagrama correspondiente a la subventana actual.
 	 */
 	void on_menu_save();
-	void on_menu_save_as();
 
 	void on_name_change();
 
