@@ -70,8 +70,6 @@ void Diagram::finalizeSerialization(){
 
 int Diagram::getId(Component* component)
 {
-	int size1 = m_components.size();
-	int size = m_serializationIndex->size();
 	if ( m_serializationIndex->count(component)==0)
 		return -1;
 	return (*m_serializationIndex)[component];
@@ -81,8 +79,7 @@ int Diagram::getId(Component* component)
 void Diagram::addComponent(Component* component)
 {
 	m_components.push_back(component);
-	Component* comp = m_components[0];
-	std::cout<<"/diagrama  " << getName() << " cantidad de componentes "<<m_components.size()<<"/";
+	
 }
 
 void Diagram::addAttribute(Attribute* Attribute) {
@@ -198,9 +195,9 @@ void Diagram::deserialize(XmlReader & reader)
 					Via* via = (Via*) components[ids[j]];
 					Connector* connector = j < component->getAttributeConnectors()->size() ?
 							(*component->getAttributeConnectors())[j] : (*component->getExitConnectors())[j - component->getAttributeConnectors()->size()];
-					int x = (*via->getPoints().begin())->getX();
-					int y = (*via->getPoints().begin())->getY();
-					int delta = 10;
+					unsigned x = (*via->getPoints().begin())->getX();
+					unsigned y = (*via->getPoints().begin())->getY();
+					unsigned delta = 10;
 					if(component->getX() + connector->getXRel() - delta <= x && x <= component->getX() + connector->getXRel() + delta &&
 							component->getY() + connector->getYRel() - delta <= y && y <= component->getY() + connector->getYRel() +delta )
 							via->setStartConnector(connector);

@@ -150,7 +150,7 @@ void Tabs::on_menu_open() {
 void Tabs::save_all() {
 	if ( get_n_pages () < 1)
 		return;
-	for(int i = 0; i < subVentanas.size(); i++) {
+	for(unsigned i = 0; i < subVentanas.size(); i++) {
 		Diagram* diagram = subVentanas[i]->getDiagram();
 		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
 		std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); //fileChooser.get_filename();
@@ -207,7 +207,7 @@ void Tabs::on_name_change() {
 }
 
 Workspace* Tabs::getWorkspace(Diagram* diagram) {
-	for( int i = 0; i < subVentanas.size(); i++) {
+	for( unsigned i = 0; i < subVentanas.size(); i++) {
 		if(subVentanas[i]->getDiagram()->getName() == diagram->getName() ) //TODO
 			return subVentanas[i]->getWorkspace();
 	}

@@ -97,7 +97,7 @@ public:
 
 	Workspace* getWorkspace(Diagram* diagram);
 	Workspace* getWorkspace(std::string name) {
-		for(int i = 0; i < subVentanas.size(); i++){
+		for(unsigned i = 0; i < subVentanas.size(); i++){
 			if(strcmp(subVentanas[i]->getDiagram()->getName().c_str(),name.c_str()) == 0)
 				return subVentanas[i]->getWorkspace();
 		}

@@ -173,7 +173,6 @@ void BarraDeMenu::validateDiagram(){
 	std::string dia;
 	std::string hora;
 
-	struct tm *tiempo;
 	time_t fecha_sistema;
 	time(&fecha_sistema);
 	filename = ctime(&fecha_sistema);

@@ -152,12 +152,12 @@ void HandlerSelected::eraseSelection(Tabs* tabs){
 
 void HandlerSelected::removeFromOtherDiagrams(VisualCompositeComponent* comp, Tabs* tabs, bool isVia) {
 	if(tabs != NULL) {
-		for( int i = 0; i < comp->getViews().size(); i++) {
+		for( unsigned i = 0; i < comp->getViews().size(); i++) {
 			DrawingAreaPlusPlus* drawArea = tabs->getWorkspace(comp->getViews()[i]->getDiagram());
 			drawArea->removeVisualComponent(comp->getViews()[i]);
 			if(!isVia) {
-				for ( unsigned j=0 ; j < comp->getViews()[j]->getChildren().size() ; j++ )  {
-					VisualComponentConector* conector = (VisualComponentConector*) comp->getViews()[j]->getChildren()[j];
+				for ( unsigned j=0 ; j < comp->getViews()[i]->getChildren().size() ; j++ )  {
+					VisualComponentConector* conector = (VisualComponentConector*) comp->getViews()[i]->getChildren()[j];
 					if(conector->getVia() != NULL) {
 						drawArea->removeVisualComponent(conector->getVia());
 						delete conector->getVia();

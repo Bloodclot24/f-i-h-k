@@ -87,7 +87,7 @@ void VisualCompositeComponent::store(XmlWriter& writer_rep, XmlWriter& writer_co
 		nodoActual = writer_rep.addCurrentNodeChild(TARGET_OTHER_DIAGRAM, "");
 		writer_rep.addProperty(nodoActual, TARGET_NAME, otherDiagram->getName().c_str());
 		int index = -1;
-		for( int i = 0; i < otherDiagram->getComponents()->size(); i++)
+		for( unsigned i = 0; i < otherDiagram->getComponents()->size(); i++)
 			if((*(otherDiagram->getComponents()))[i] == viewComp)
 				index = i;
 		//writer_rep.addProperty(nodoActual, TARGET_ID, utils.convertToString(otherDiagram->getId(viewComp)).c_str());
