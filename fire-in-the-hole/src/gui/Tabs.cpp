@@ -113,7 +113,7 @@ void Tabs::on_menu_open_proyect() {
 			XmlReader reader(archivo.c_str());
 			Diagram* circ = new Diagram();
 			agregarSubVentana(circ);
-			subVentanas.back()->getWorkspace()->on_load(reader);
+			subVentanas.back()->getWorkspace()->on_load(reader, this);
 			set_tab_label_text(*subVentanas.back(), circ->getName());
 		}
 	}
@@ -135,7 +135,7 @@ void Tabs::on_menu_open() {
 		XmlReader reader(fileChooser.get_filename().c_str());
 		Diagram* circ = new Diagram();
 		agregarSubVentana(circ);
-		subVentanas.back()->getWorkspace()->on_load(reader);
+		subVentanas.back()->getWorkspace()->on_load(reader, this);
 		set_tab_label_text(*subVentanas.back(), circ->getName());
 	}
 }
