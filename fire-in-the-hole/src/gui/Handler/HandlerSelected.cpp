@@ -126,7 +126,7 @@ void HandlerSelected::eraseSelection(Tabs* tabs){
 		VisualComponentVia* via = dynamic_cast<VisualComponentVia*>((*m_selection)[i]);
 		if ( via != NULL) {
 			m_drawArea->removeVisualComponent(via);
-			removeFromOtherDiagrams(via,tabs);
+			removeFromOtherDiagrams(via,tabs,true);
 			delete via;
 		} else
 			resto.push_back((*m_selection)[i]);
@@ -139,24 +139,32 @@ void HandlerSelected::eraseSelection(Tabs* tabs){
 			VisualComponentConector* conector = (VisualComponentConector*) resto[i]->getChildren()[j]; //son everythings conectores
 			if(conector->getVia() != NULL) {
 				m_drawArea->removeVisualComponent(conector->getVia());
-				removeFromOtherDiagrams(conector->getVia(),tabs);
+				//removeFromOtherDiagrams(conector->getVia(),tabs, true);
 				delete conector->getVia(); //setea los conectores de los extremos a NULL
 			}
 		}
 		m_drawArea->removeVisualComponent(resto[i]);
-		removeFromOtherDiagrams(resto[i],tabs);
+		removeFromOtherDiagrams(resto[i],tabs,false);
 		delete resto[i];
 	}
 	m_selection->clear();
 }
 
-void HandlerSelected::removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs) {
+void HandlerSelected::removeFromOtherDiagrams(VisualCompositeComponent* comp, Tabs* tabs, bool isVia) {
 	if(tabs != NULL) {
-		for( int j = 0; j < via->getViews().size(); j++) {
-			DrawingAreaPlusPlus* drawArea = tabs->getWorkspace(via->getViews()[j]->getDiagram());
-			if(drawArea != NULL) //TODO: ver como solucionar esto para q no quede colgado, pincharia antes en el get diagram
-				drawArea->removeVisualComponent(via->getViews()[j]);
-			delete via->getViews()[j];
+		for( int i = 0; i < comp->getViews().size(); i++) {
+			DrawingAreaPlusPlus* drawArea = tabs->getWorkspace(comp->getViews()[i]->getDiagram());
+			drawArea->removeVisualComponent(comp->getViews()[i]);
+			if(!isVia) {
+				for ( unsigned j=0 ; j < comp->getViews()[j]->getChildren().size() ; j++ )  {
+					VisualComponentConector* conector = (VisualComponentConector*) comp->getViews()[j]->getChildren()[j];
+					if(conector->getVia() != NULL) {
+						drawArea->removeVisualComponent(conector->getVia());
+						delete conector->getVia();
+					}
+				}
+			}
+			delete comp->getViews()[i];
 		}
 	}
 }

@@ -85,7 +85,7 @@ private:
 
 	void eraseSelection(Tabs* tabs = NULL);
 
-	void removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs);
+	void removeFromOtherDiagrams(VisualCompositeComponent* via, Tabs* tabs, bool isVia);
 
 	void selectAll(bool select);
 
