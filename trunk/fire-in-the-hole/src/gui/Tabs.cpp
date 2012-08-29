@@ -24,7 +24,6 @@ Tabs::Tabs(BarraDeMenu& barraDeMenu) : barraDeMenu(barraDeMenu) {
 	m_refActionGroup->add( Gtk::Action::create("RenombrarDiagrama", Gtk::Stock::EDIT, "Rename Diagram"), sigc::mem_fun(this, &Tabs::on_name_change));
 
 	barraDeMenu.addActionGroup(m_refActionGroup);
-	m_active = false;
 }
 
 Tabs::~Tabs() {
@@ -66,10 +65,7 @@ void Tabs::removerSubVentanaActual() {
 }
 
 void Tabs::on_switch_page_fake(GtkNotebookPage* page, guint page_num) {
-	SubVentana* subventanaAnterior = barraDeMenu.getSubVentana();
 	barraDeMenu.setSubventana(subVentanas[page_num]);
-	if(m_active)
-		barraDeMenu.switchTabs(subventanaAnterior);
 }
 
 void Tabs::on_menu_close() {
@@ -154,7 +150,6 @@ void Tabs::save_all() {
 		return;
 	for(unsigned i = 0; i < subVentanas.size(); i++) {
 		Diagram* diagram = subVentanas[i]->getDiagram();
-		std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
 		std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName(); 
 		XmlWriter writer_rep("diagram");
 		XmlWriter writer_comp("diagram");
@@ -168,7 +163,6 @@ void Tabs::on_menu_save() {
 	if ( get_n_pages () < 1)
 		return;
 	Diagram* diagram = subVentanas[get_current_page()]->getDiagram();
-	std::cout<<"cantidad: "<<diagram->getComponents()->size()<<" diagrama "<< diagram->getName()<<std::endl;
 	std::string path = Settings::getInstance().getValue("DiagramsPath") + m_proyectName + "/" + diagram->getName();
 	XmlWriter writer_rep("diagram");
 	XmlWriter writer_comp("diagram");
@@ -185,7 +179,7 @@ bool Tabs::on_key_release_event(GdkEventKey* event) {
 
 bool Tabs::on_key_press_event(GdkEventKey* event){
 	if (get_n_pages () > 0)
-		subVentanas[get_current_page()]->getWorkspace()->on_key_press_event(event, this);
+		subVentanas[get_current_page()]->getWorkspace()->on_key_press_event(event);
 	return false;
 }
 
@@ -211,6 +205,14 @@ void Tabs::on_name_change() {
 Workspace* Tabs::getWorkspace(Diagram* diagram) {
 	for( unsigned i = 0; i < subVentanas.size(); i++) {
 		if(subVentanas[i]->getDiagram()->getName() == diagram->getName() ) 
+			return subVentanas[i]->getWorkspace();
+	}
+	return NULL;
+}
+
+Workspace* Tabs::getWorkspace(std::string name) {
+	for(unsigned i = 0; i < subVentanas.size(); i++){
+		if(strcmp(subVentanas[i]->getDiagram()->getName().c_str(),name.c_str()) == 0)
 			return subVentanas[i]->getWorkspace();
 	}
 	return NULL;

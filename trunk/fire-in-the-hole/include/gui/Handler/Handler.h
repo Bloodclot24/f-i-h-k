@@ -9,7 +9,6 @@
 #define DELETE 65535
 
 class DrawingAreaPlusPlus;
-class Tabs;
 
 class Handler {
 public:
@@ -28,7 +27,7 @@ public:
 
 	virtual void on_key_release_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent);
 
-	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs);
+	virtual void on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent);
 
 	virtual void on_right_click_press_event(GdkEventButton* event, VisualCompositeComponent* touchedComponent);
 

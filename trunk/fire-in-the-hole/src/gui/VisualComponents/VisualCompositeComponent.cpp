@@ -86,12 +86,7 @@ void VisualCompositeComponent::store(XmlWriter& writer_rep, XmlWriter& writer_co
 		Diagram* otherDiagram = (*it)->getDiagram();
 		nodoActual = writer_rep.addCurrentNodeChild(TARGET_OTHER_DIAGRAM, "");
 		writer_rep.addProperty(nodoActual, TARGET_NAME, otherDiagram->getName().c_str());
-		int index = -1;
-		for( unsigned i = 0; i < otherDiagram->getComponents()->size(); i++)
-			if((*(otherDiagram->getComponents()))[i] == viewComp)
-				index = i;
-	
-		writer_rep.addProperty(nodoActual, TARGET_ID, utils.convertToString(index).c_str());
+		writer_rep.addProperty(nodoActual, TARGET_ID, utils.convertToString(otherDiagram->getId(viewComp)).c_str());
 	}
 }
 
@@ -120,7 +115,7 @@ void VisualCompositeComponent::showProperties(){
 Diagram* VisualCompositeComponent::getDiagram(){
 	return m_diagram;
 }
-
+/*
 void VisualCompositeComponent::serializedAttributes(XmlWriter & xml, Diagram * diagram, Component * component){
 
 	xmlNode* nodoActual;
@@ -140,7 +135,7 @@ void VisualCompositeComponent::serializedAttributes(XmlWriter & xml, Diagram * d
 		}
 	}
 }
-
+*/
 void VisualCompositeComponent::update(){
 	for (std::vector<VisualCompositeComponent*>::iterator it = m_views.begin(); it != m_views.end(); ++it) {
 		Component* viewComp = (*it)->getComponent();

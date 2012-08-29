@@ -8,7 +8,6 @@ VisualComponentEntity::VisualComponentEntity( Diagram* diagram) : VisualComposit
 
 VisualComponentEntity::VisualComponentEntity(const VisualComponentEntity& other) : VisualCompositeComponent(other.m_diagram) {
 	m_component = new Entity(*(Entity*)other.m_component);
-	std::cout<<other.m_diagram->getName();
 	initialize();
 }
 

@@ -85,7 +85,7 @@ protected:
 		subVisualComponentent->setY(yCenter + yDelta - subVisualComponentent->getYCenter());
 	}
 
-    void serializedAttributes(XmlWriter & xml, Diagram* diagram, Component* component);
+//    void serializedAttributes(XmlWriter & xml, Diagram* diagram, Component* component);
 
     void update();
 

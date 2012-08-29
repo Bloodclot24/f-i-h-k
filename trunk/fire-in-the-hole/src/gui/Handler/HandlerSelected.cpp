@@ -86,9 +86,9 @@ void HandlerSelected::selectAll(bool select){
 		(*m_selection)[i]->setSelected(select);
 }
 
-void HandlerSelected::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs){
+void HandlerSelected::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent){
 	if ( event->keyval == DELETE)
-		deleteSelection(tabs);
+		deleteSelection();
 }
 
 void HandlerSelected::on_right_click_release_event(GdkEventButton* event, VisualCompositeComponent* touchedComponent){
@@ -114,19 +114,18 @@ void HandlerSelected::on_right_click_release_event(GdkEventButton* event, Visual
 	}
 }
 
-void HandlerSelected::deleteSelection(Tabs* tabs){
-	eraseSelection(tabs);
+void HandlerSelected::deleteSelection(){
+	eraseSelection();
 	m_drawArea->setHandler( new HandlerDefault(m_drawArea));
 }
 
-void HandlerSelected::eraseSelection(Tabs* tabs){
+void HandlerSelected::eraseSelection(){
 	std::vector<VisualCompositeComponent*> resto;
 	//Borra primero las vias porque son las unicas que no tienen conectores propios
 	for ( unsigned i=0 ; i < m_selection->size() ; i++ ) {
 		VisualComponentVia* via = dynamic_cast<VisualComponentVia*>((*m_selection)[i]);
 		if ( via != NULL) {
 			m_drawArea->removeVisualComponent(via);
-			removeFromOtherDiagrams(via,tabs,true);
 			delete via;
 		} else
 			resto.push_back((*m_selection)[i]);
@@ -144,29 +143,9 @@ void HandlerSelected::eraseSelection(Tabs* tabs){
 			}
 		}
 		m_drawArea->removeVisualComponent(resto[i]);
-		removeFromOtherDiagrams(resto[i],tabs,false);
 		delete resto[i];
 	}
 	m_selection->clear();
-}
-
-void HandlerSelected::removeFromOtherDiagrams(VisualCompositeComponent* comp, Tabs* tabs, bool isVia) {
-	if(tabs != NULL) {
-		for( unsigned i = 0; i < comp->getViews().size(); i++) {
-			DrawingAreaPlusPlus* drawArea = tabs->getWorkspace(comp->getViews()[i]->getDiagram());
-			drawArea->removeVisualComponent(comp->getViews()[i]);
-			if(!isVia) {
-				for ( unsigned j=0 ; j < comp->getViews()[i]->getChildren().size() ; j++ )  {
-					VisualComponentConector* conector = (VisualComponentConector*) comp->getViews()[i]->getChildren()[j];
-					if(conector->getVia() != NULL) {
-						drawArea->removeVisualComponent(conector->getVia());
-						delete conector->getVia();
-					}
-				}
-			}
-			delete comp->getViews()[i];
-		}
-	}
 }
 
 bool HandlerSelected::onlyOneComponentSelected() {

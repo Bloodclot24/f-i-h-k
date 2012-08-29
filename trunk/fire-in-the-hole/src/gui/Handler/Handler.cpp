@@ -16,7 +16,7 @@ void Handler::on_left_click_release_event(GdkEventButton* event, VisualComposite
 
 void Handler::on_key_release_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent){ }
 
-void Handler::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent, Tabs* tabs){
+void Handler::on_key_press_event(GdkEventKey* event, VisualCompositeComponent* touchedComponent){
 	m_drawArea->setHandler( new HandlerDefault(m_drawArea));
 }
 

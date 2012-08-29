@@ -42,24 +42,12 @@ void Diagram::serializeConnectedComponents(std::vector<Connector*> connectors, X
 	}
 }
 
-void Diagram::startSerialization(){
-	m_serializationIndex = new std::map< Component* , int>();
-	int id = 0;
-	for(unsigned i = 0; i < m_components.size(); i++){
-		(*m_serializationIndex)[m_components[i]] = id ;
-		id++;
-	}
-}
-
-void Diagram::finalizeSerialization(){
-	delete m_serializationIndex;
-}
-
 int Diagram::getId(Component* component)
 {
-	if ( m_serializationIndex->count(component)==0)
-		return -1;
-	return (*m_serializationIndex)[component];
+	for( unsigned i = 0; i < m_components.size(); i++)
+		if(m_components[i] == component)
+			return i;
+	return -1;
 
 }
 
@@ -76,7 +64,7 @@ void Diagram::removeComponent(Component* component) {
 		   return;
 		}
 }
-
+/*
 void Diagram::deserialize(XmlReader & reader)
 {
 	try{
@@ -163,7 +151,7 @@ void Diagram::deserialize(const std::string &str){
 	XmlReader xml(str.c_str(), str.size());
 	deserialize(xml);
 }
-
+*/
 void validateConections(std::vector<Connector*> connectors){
 
 bool conectado = false;

@@ -18,10 +18,6 @@ class Diagram {
 private:
 	std::vector<Component*> m_components;
 
-	//Mapa utilizado en la serializacion para asociar los
-	//identificadores con sus componentes
-	std::map< Component* , int >* m_serializationIndex;
-
 	std::string m_name, m_path;
 	unsigned m_sizeX;
 	unsigned m_sizeY;
@@ -41,13 +37,11 @@ public:
 		m_path = path;
     }
 
-	void startSerialization();
-	void finalizeSerialization();
     void addComponent(Component *component);
     void removeComponent(Component*);
 
-    void deserialize(XmlReader & reader);
-    void deserialize(const std::string & str);
+//    void deserialize(XmlReader & reader);
+//    void deserialize(const std::string & str);
 
     void validateDiagram(std::fstream & filestr);
 
